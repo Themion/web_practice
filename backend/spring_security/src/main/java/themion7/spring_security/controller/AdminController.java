@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("admin")
 public class AdminController {
 
-    @GetMapping("index")
+    @GetMapping("")
     public String index(){
-        return "admin/index";
+        return "admin";
     }
 }
