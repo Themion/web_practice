@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+	<body>
+		<input type="button" value="fetch" onclick="
+			fetch('item/html').then(function(response) {
+				console.log(response)
+				if (response.status == '404') alert('not found') 
+				else response.text().then(function(text) {
+				document.querySelector('article').innerHTML = text
+				})
+			})
+		">
+    	<article>
+    	</article>
+  	</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <script src="https://unpkg.com/react@17.0.2/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/prop-types@15.7.2/prop-types.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+
+<body>
+  <div></div>
+</body>
+<script type="text/babel">
+  /* let i = 0
+  const Button = (props) => {
+    console.log(props.text)
+
+    function onClick () { props.setVal(++i) }
+
+    return (
+      <div>
+        <button 
+          style={props.style}
+          onClick={onClick}>
+          {props.text}
+        </button>
+        <br />
+      </div>
+    )
+  }
+  Button.propTypes = {
+    style: PropTypes.object,
+    text: PropTypes.string,
+    onClick: PropTypes.func
+  }
+
+  const MemoBtn = React.memo(Button)
+
+  const App = () => {
+    const [val, setVal] = React.useState(0)
+
+    return (
+      <div>
+        <MemoBtn text={val} />
+        <MemoBtn text="btn" setVal={setVal} />  
+      </div>
+    )
+  } */
+
+  const Button = (props) => {
+    return (
+      <div>
+        <button style={props.style} onClick={props.onClick}>
+          {props.text}
+        </button>
+        <br />
+      </div>
+    )
+  }
+  Button.propTypes = {
+    text: PropTypes.string.isRequired,
+    style: PropTypes.object,
+    setVal: PropTypes.func
+  }
+
+  const App = () => {
+    const [val, setVal] = React.useState(0)
+    function onClick () { setVal(val + 1); console.log(val) }
+    return (
+      <div>
+        <Button text={val} style={{width: "60px", height: "30px"}} onClick={1} />
+        <Button style={{width: "60px"}} onClick={onClick} />
+      </div>
+    )
+  }
+
+  ReactDOM.render(<App />, document.querySelector("div"));
+</script>
+
+</html>

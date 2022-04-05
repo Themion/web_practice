@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+
+<body>
+</body>
+<script type="text/babel">
+  const body = document.querySelector("body");
+
+  const Min2Hr = () => {
+    const [min, setMin] = React.useState(0);
+    const [hr, setHr] = React.useState(0);
+    const [m2h, setM2h] = React.useState(false);
+
+    function onChange (event) {
+      const val = event.target.valueAsNumber;
+      if (!m2h) {
+        setMin(val);
+        setHr(Math.round(val / 60));
+      }
+      else {
+        setHr(val);
+        setMin(val * 60);
+      }
+    }
+
+    function onInvert (event) { setM2h(!m2h) }
+
+    return (
+      <div>
+        <div>
+          <label htmlFor="min">Minutes</label>
+          <input
+            value={min}
+            id="min"
+            placeholder="Minutes"
+            type="number"
+            disabled={m2h}
+            onChange={onChange}></input>
+        </div>
+        <div>
+          <label htmlFor="hr">Hours</label>
+          <input
+            value={hr}
+            id="hr"
+            placeholder="Hours"
+            type="number"
+            disabled={!m2h}
+            onChange={onChange}></input><br />
+        </div>
+        <button onClick={() => { setMin(0); setHr(0); }}>erase</button>
+        <button onClick={onInvert}>{m2h ? "to min" : "to hr"}</button>
+      </div>
+    )
+  }
+
+  const Mile2Km = () => {
+    const [mile, setMile] = React.useState(0)
+    const [km, setKm] = React.useState(0)
+    const [m2k, setM2k] = React.useState(false)
+
+    function onChange (event) {
+      const val = event.target.valueAsNumber;
+      if (!m2k) {
+        setMile(val);
+        setKm(val * 1.60934);
+      }
+      else {
+        setKm(val);
+        setMile(val * 0.621371);
+      }
+    }
+
+    function onInvert (event) { 
+      setM2k(!m2k)
+      setKm(Math.round(km))
+      setMile(Math.round(mile))
+    }
+
+    return (
+      <div>
+        <div>
+          <label htmlFor="mile">Miles</label>
+          <input
+            value={mile}
+            id="mile"
+            placeholder="Mile"
+            type="number"
+            disabled={m2k}
+            onChange={onChange}></input>
+        </div>
+        <div>
+          <label htmlFor="km">Km</label>
+          <input
+            value={km}
+            id="km"
+            placeholder="Kilometer"
+            type="number"
+            disabled={!m2k}
+            onChange={onChange}></input><br />
+        </div>
+        <button onClick={() => { setMile(0); setKm(0); }}>erase</button>
+        <button onClick={onInvert}>{m2k ? "to mile" : "to km"}</button>
+      </div>
+    )
+  }
+
+  const Container = () => {
+    const [idx, setIdx] = React.useState("0")
+
+    function onChange(event) {
+      setIdx(event.target.value)
+    }
+
+    return (
+      <div>
+        <h1 id="title">Converter</h1>
+        <select onChange={onChange} placeholder={idx}>
+          <option value="0">Min2Hr</option>
+          <option value="1">Mile2Km</option>
+        </select>
+
+        {idx === "0" ? <Min2Hr /> : <Mile2Km />}
+      </div>
+    )
+  }
+
+  ReactDOM.render(<Container />, body);
+</script>
+
+</html>

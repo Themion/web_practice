@@ -1,0 +1,31 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        link(rel="stylesheet", href="https://unpkg.com/mvp.css")
+        title Noom
+    body
+        header
+            h1 It works!
+        main
+            div#list
+            div#welcome 
+                h4 Open rooms
+                ul#roomlist
+                form#welcomeForm
+                    input#roomname(type="text" placeholder="room name" required)
+                    input#nickname(type="text" placeholder="your nickname" required)
+                    button Enter a Room
+            div#room(hidden)
+                h3#roomname
+                div#show_name(style="margin-bottom:1rem;")
+                form#nickname(hidden)
+                    input#nickname(type="text" required)
+                div#chats(style="margin: 0 3rem;")
+                form#chatForm
+                    input#chat(type="text" required)
+                    button Send
+        script(src="/socket.io/socket.io.js") 
+        script(src="/public/js/app.js") 

@@ -1,0 +1,30 @@
+spring:
+    h2:
+        console:
+            enabled: true
+    datasource:
+        url: jdbc:h2:mem:testdb
+        driver-class-name: org.h2.Driver
+        username: sa
+        password:
+    jpa:
+        database-paltform: org.hibernate.dialect.H2Dialect
+        hibernate:
+            ddl-auto: create-drop
+        properties:
+            hibernate:
+                format_sql: true
+                show_sql: true
+        defer-datasource-initialization: true
+    init:
+        mode: always
+
+logging:
+    level:
+        themion7: DEBUG
+
+jwt:
+    header: Authorization
+    secret: TG9yZW0gaXBzdW0gZG9sb3Igc2l0IGFtZXQgY29uc2VjdGV0dXIgYWRpcGlzaWNpbmcgZWxpdC4gQXNzdW1lbmRhIHF1byBxdW9kIGlwc2FtIHJhdGlvbmUgYWNjdXNhbXVzIGV0LCB2ZW5pYW0sIG1vbGVzdGlhZSBxdWkgcXVpZGVtIGF0cXVlIHNpdCBhbGlhcyBkb2xvcnVtIGl0YXF1ZT8gQXNwZXJpb3JlcyBkb2xvcmUgZWEgdXQgb3B0aW8gcGFyaWF0dXIuCg==
+    # echo Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda quo quod ipsam ratione accusamus et, veniam, molestiae qui quidem atque sit alias dolorum itaque? Asperiores dolore ea ut optio pariatur. | base64
+    token-validity-in-seconds: 86400

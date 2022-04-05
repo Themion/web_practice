@@ -1,0 +1,15 @@
+body {
+  font-family: sans-serif;
+}
+  
+.bold {
+  font-weight:bold;
+}
+
+input.slide {
+  width: 200px;
+}
+
+input.number {
+  width: 3em;
+}
