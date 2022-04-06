@@ -1,16 +1,16 @@
-package themion7.spring_security.controller;
+package themion7.spring_security.config;
 
 import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Component;
 
 import lombok.AllArgsConstructor;
 import themion7.spring_security.domain.User;
 import themion7.spring_security.service.UserService;
 
-@Controller
+@Component
 @AllArgsConstructor
 public class DbInit implements CommandLineRunner {
 
