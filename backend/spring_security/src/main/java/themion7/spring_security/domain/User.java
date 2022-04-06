@@ -32,7 +32,7 @@ public class User {
     @NonNull
     private String permissions;
 
-    public List<String> getRoleList(){
+    public List<String> getRolesList(){
         if(this.roles.length() > 0){
             return Arrays.asList(this.roles.split(","));
         }
