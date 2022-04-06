@@ -18,9 +18,27 @@ public class DbInit implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        User user = new User("user", "user123", "USER", "");
-        User admin = new User("admin", "admin123", "ADMIN", "ACCESS_TEST1,ACCESS_TEST2");
-        User manager = new User("manager", "manager123", "MANAGER", "ACCESS_TEST1");
+        User user = User.builder()
+            .username("user")
+            .password("user123")
+            .active(1)
+            .role("USER")
+            .build();
+        User admin = User.builder()
+            .username("admin")
+            .password("admin123")
+            .active(1)
+            .role("ADMIN")
+            .permission("ACCESS_TEST1")
+            .permission("ACCESS_TEST2")
+            .build();
+        User manager = User.builder()
+            .username("manager")
+            .password("manager123")
+            .active(1)
+            .role("MANAGER")
+            .permission("ACCESS_TEST1")
+            .build();
 
         List<User> users = Arrays.asList(user, admin, manager);
         

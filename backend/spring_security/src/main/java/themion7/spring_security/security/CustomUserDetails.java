@@ -20,11 +20,11 @@ public class CustomUserDetails implements UserDetails{
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> authorities = new ArrayList<>();
 
-        this.user.getPermissionsList().forEach(permission -> {
+        this.user.getPermissions().forEach(permission -> {
             GrantedAuthority authority = new SimpleGrantedAuthority(permission);
             authorities.add(authority);
         });
-        this.user.getRolesList().forEach(role -> {
+        this.user.getRoles().forEach(role -> {
             GrantedAuthority authority = new SimpleGrantedAuthority("ROLE_" + role);
             authorities.add(authority);
         });

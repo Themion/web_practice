@@ -8,14 +8,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import lombok.AllArgsConstructor;
 import themion7.spring_security.domain.User;
-import themion7.spring_security.reposiroty.UserRepository;
+import themion7.spring_security.service.UserService;
 
 @RestController
 @AllArgsConstructor
 @RequestMapping("api")
 public class PublicRestApiController {
 
-    private final UserRepository repo;
+    private final UserService service;
 
     @GetMapping("test1")
     public String test1(){
@@ -29,7 +29,7 @@ public class PublicRestApiController {
 
     @GetMapping("users")
     public List<User> users() {
-        return this.repo.findAll();
+        return this.service.findAll();
     }
 
 }

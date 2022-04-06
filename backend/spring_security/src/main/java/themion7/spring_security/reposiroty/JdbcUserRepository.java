@@ -34,16 +34,12 @@ public class JdbcUserRepository implements UserRepository {
 
             @Override
             public User mapRow(ResultSet rs, int rowNum) throws SQLException {
-                User user = new User();
-                user.setId(rs.getLong("id"));
-                user.setUsername(rs.getString("username"));
-                user.setPassword(rs.getString("password"));
-                user.setActive(rs.getInt("active"));
-
-                user.setRoles(rs.getString("roles"));
-                user.setPermissions(rs.getString("permissions"));
-
-                return user;
+                return User.builder()
+                    .id(rs.getLong("id"))
+                    .username(rs.getString("username"))
+                    .password(rs.getString("password"))
+                    .active(rs.getInt("active"))
+                    .build();
             }
             
         };
@@ -58,8 +54,6 @@ public class JdbcUserRepository implements UserRepository {
         parameters.put("username", user.getUsername());
         parameters.put("password", user.getPassword());
         parameters.put("active", user.getActive());
-        parameters.put("roles", user.getRoles());
-        parameters.put("permissions", user.getPermissions());
 
         Number key = jdbcInsert.executeAndReturnKey(new MapSqlParameterSource(parameters));
         user.setId(key.longValue());

@@ -1,16 +1,17 @@
 package themion7.spring_security.domain;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import lombok.Singular;
 
 @AllArgsConstructor
+@Builder
 @Data
 @NoArgsConstructor
 @RequiredArgsConstructor
@@ -24,26 +25,12 @@ public class User {
     @NonNull
     private String password;
 
-    private int active = 1;
+    private int active;
     
-    @NonNull
-    private String roles;
+    @Singular
+    private List<String> roles;
     
-    @NonNull
-    private String permissions;
-
-    public List<String> getRolesList(){
-        if(this.roles.length() > 0){
-            return Arrays.asList(this.roles.split(","));
-        }
-        return new ArrayList<>();
-    }
-
-    public List<String> getPermissionsList(){
-        if(this.permissions.length() > 0){
-            return Arrays.asList(this.permissions.split(","));
-        }
-        return new ArrayList<>();
-    }
+    @Singular
+    private List<String> permissions;
 
 }
