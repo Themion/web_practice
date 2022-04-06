@@ -33,4 +33,11 @@ public class User {
     @Singular
     private List<String> permissions;
 
+    public static class UserBuilder {
+        public UserBuilder() {
+            super();
+            this.active = 1;
+        }
+    }
+
 }

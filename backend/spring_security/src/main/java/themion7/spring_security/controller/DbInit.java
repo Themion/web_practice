@@ -21,13 +21,11 @@ public class DbInit implements CommandLineRunner {
         User user = User.builder()
             .username("user")
             .password("user123")
-            .active(1)
             .role("USER")
             .build();
         User admin = User.builder()
             .username("admin")
             .password("admin123")
-            .active(1)
             .role("ADMIN")
             .permission("ACCESS_TEST1")
             .permission("ACCESS_TEST2")
@@ -35,7 +33,6 @@ public class DbInit implements CommandLineRunner {
         User manager = User.builder()
             .username("manager")
             .password("manager123")
-            .active(1)
             .role("MANAGER")
             .permission("ACCESS_TEST1")
             .build();
