@@ -2,8 +2,7 @@ server:
     port: 8443
     ssl:
         enabled: true
-        # web_practice 디렉토리 기준
-        key-store: backend/spring_security/src/main/resources/spring_security.p12
+        key-store: classpath:spring_security.p12
         key-store-password: spring_security
         key-store-type: PKCS12
         key-alias: spring_security
@@ -13,3 +12,10 @@ spring:
         user:
             name: root
             password: rootroot
+    datasource:
+        url: jdbc:h2:tcp://localhost/~/workspace/web_practice/backend/spring_security/test
+        driver-class-name: org.h2.Driver
+        username: sa
+    sql:
+        init:
+            mode: always
