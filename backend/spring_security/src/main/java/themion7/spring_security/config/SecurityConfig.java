@@ -41,7 +41,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     // get method로 logout
                     // .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                     .logoutUrl("/logout")
-                    .logoutSuccessUrl("/login?logout");
+                    .logoutSuccessUrl("/login?logout")
+                    .and()
+                .rememberMe()
+                    .tokenValiditySeconds(60 * 60 * 24 * 30);
     }
 
     @Override
