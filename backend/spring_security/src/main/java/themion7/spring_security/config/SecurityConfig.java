@@ -7,6 +7,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+// import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import lombok.AllArgsConstructor;
 import themion7.spring_security.security.CustomUserDetailsService;
@@ -18,7 +19,7 @@ import themion7.spring_security.security.PasswordEncoder;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private CustomUserDetailsService userDetailsService;
-    private final PasswordEncoder encoder;
+    private PasswordEncoder encoder;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -31,9 +32,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/test1").hasAuthority("ACCESS_TEST1")
                 .antMatchers("/api/test2").hasAuthority("ACCESS_TEST2")
                 .antMatchers("/api/users").hasRole("ADMIN")
-                .anyRequest().authenticated()
                 .and()
-            .httpBasic();
+            // .httpBasic();
+            .formLogin()
+                .loginPage("/login").permitAll()
+                    .and()
+                .logout()
+                    // get method로 logout
+                    // .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                    .logoutUrl("/logout")
+                    .logoutSuccessUrl("/login?logout");
     }
 
     @Override
