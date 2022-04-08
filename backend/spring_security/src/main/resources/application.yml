@@ -1,21 +1,25 @@
 server:
-    port: 8443
-    ssl:
-        enabled: true
-        key-store: classpath:spring_security.p12
-        key-store-password: spring_security
-        key-store-type: PKCS12
-        key-alias: spring_security
-
+  port: 8443
+  ssl:
+    enabled: true
+    key-store: classpath:spring_security.p12
+    key-store-password: spring_security
+    key-store-type: PKCS12
+    key-alias: spring_security
 spring:
-    security:
-        user:
-            name: root
-            password: rootroot
-    datasource:
-        url: jdbc:h2:tcp://localhost/~/workspace/web_practice/backend/spring_security/test
-        driver-class-name: org.h2.Driver
-        username: sa
-    sql:
-        init:
-            mode: always
+  security:
+    user:
+      name: root
+      password: rootroot
+  datasource:
+    url: jdbc:h2:tcp://localhost/~/workspace/web_practice/backend/spring_security/test
+    driver-class-name: org.h2.Driver
+    username: sa
+  sql:
+    init:
+      mode: always
+jwt:
+  secret: TG9yZW0gaXBzdW0gZG9sb3Igc2l0IGFtZXQgY29uc2VjdGV0dXIgYWRpcGlzaWNpbmcgZWxpdC4gUXVpYSBmdWdpdCBudWxsYSBkdWNpbXVzIHV0IGRvbG9yZXMgZXhwbGljYWJvLCBvZGlvIGZ1Z2lhdCBkb2xvcmlidXMgZXJyb3IgbW9kaT8K
+  token-life-span: 86400000 # 1000 * 60 * 60 * 24
+  prefix: Bearer
+  header: Authorization
