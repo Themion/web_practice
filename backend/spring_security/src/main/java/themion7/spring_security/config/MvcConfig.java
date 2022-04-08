@@ -23,22 +23,22 @@ public class MvcConfig {
     private final PasswordEncoder encoder;
 
     @Bean
-    public UserRepository userService() {
-        return new UserRepository(userRepository(), roleRepository(), permissionRepository(), encoder);
+    public UserRepository userRepository() {
+        return new UserRepository(userDao(), roleDao(), permissionDao(), encoder);
     }
 
     @Bean
-    public UserDao userRepository() {
+    public UserDao userDao() {
         return new JdbcUserDao(dataSource);
     }
 
     @Bean 
-    public RoleDao roleRepository() {
+    public RoleDao roleDao() {
         return new JdbcRoleDao(dataSource);
     }
 
     @Bean
-    public PermissionDao permissionRepository() {
+    public PermissionDao permissionDao() {
         return new JdbcPermissionDao(dataSource);
     }
 
