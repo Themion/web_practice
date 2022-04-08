@@ -6,14 +6,14 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import lombok.AllArgsConstructor;
-import themion7.spring_security.reposiroty.JdbcPermissionRepository;
-import themion7.spring_security.reposiroty.JdbcRoleRepository;
-import themion7.spring_security.reposiroty.JdbcUserRepository;
-import themion7.spring_security.reposiroty.PermissionRepository;
-import themion7.spring_security.reposiroty.RoleRepository;
-import themion7.spring_security.reposiroty.UserRepository;
+import themion7.spring_security.dao.JdbcPermissionDao;
+import themion7.spring_security.dao.JdbcRoleDao;
+import themion7.spring_security.dao.JdbcUserDao;
+import themion7.spring_security.dao.PermissionDao;
+import themion7.spring_security.dao.RoleDao;
+import themion7.spring_security.dao.UserDao;
+import themion7.spring_security.repository.UserRepository;
 import themion7.spring_security.security.PasswordEncoder;
-import themion7.spring_security.service.UserService;
 
 @Configuration
 @AllArgsConstructor
@@ -23,23 +23,23 @@ public class MvcConfig {
     private final PasswordEncoder encoder;
 
     @Bean
-    public UserService userService() {
-        return new UserService(userRepository(), roleRepository(), permissionRepository(), encoder);
+    public UserRepository userService() {
+        return new UserRepository(userRepository(), roleRepository(), permissionRepository(), encoder);
     }
 
     @Bean
-    public UserRepository userRepository() {
-        return new JdbcUserRepository(dataSource);
+    public UserDao userRepository() {
+        return new JdbcUserDao(dataSource);
     }
 
     @Bean 
-    public RoleRepository roleRepository() {
-        return new JdbcRoleRepository(dataSource);
+    public RoleDao roleRepository() {
+        return new JdbcRoleDao(dataSource);
     }
 
     @Bean
-    public PermissionRepository permissionRepository() {
-        return new JdbcPermissionRepository(dataSource);
+    public PermissionDao permissionRepository() {
+        return new JdbcPermissionDao(dataSource);
     }
 
 }

@@ -1,4 +1,4 @@
-package themion7.spring_security.reposiroty;
+package themion7.spring_security.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -19,12 +19,12 @@ import org.springframework.transaction.annotation.Transactional;
 import themion7.spring_security.domain.Permission;
 
 @Transactional
-public class JdbcPermissionRepository implements PermissionRepository{
+public class JdbcPermissionDao implements PermissionDao{
 
     private final JdbcTemplate jdbcTemplate;
 
     @Autowired
-    public JdbcPermissionRepository(DataSource dataSource) {
+    public JdbcPermissionDao(DataSource dataSource) {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 

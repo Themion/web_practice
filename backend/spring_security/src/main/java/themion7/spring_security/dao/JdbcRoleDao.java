@@ -1,4 +1,4 @@
-package themion7.spring_security.reposiroty;
+package themion7.spring_security.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -19,12 +19,12 @@ import org.springframework.transaction.annotation.Transactional;
 import themion7.spring_security.domain.Role;
 
 @Transactional
-public class JdbcRoleRepository implements RoleRepository{
+public class JdbcRoleDao implements RoleDao{
 
     private final JdbcTemplate jdbcTemplate;
 
     @Autowired
-    public JdbcRoleRepository(DataSource dataSource) {
+    public JdbcRoleDao(DataSource dataSource) {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 

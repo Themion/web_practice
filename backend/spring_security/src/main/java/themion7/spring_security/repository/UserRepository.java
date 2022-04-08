@@ -1,23 +1,23 @@
-package themion7.spring_security.service;
+package themion7.spring_security.repository;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import lombok.AllArgsConstructor;
+import themion7.spring_security.dao.PermissionDao;
+import themion7.spring_security.dao.RoleDao;
+import themion7.spring_security.dao.UserDao;
 import themion7.spring_security.domain.Permission;
 import themion7.spring_security.domain.Role;
 import themion7.spring_security.domain.User;
-import themion7.spring_security.reposiroty.PermissionRepository;
-import themion7.spring_security.reposiroty.RoleRepository;
-import themion7.spring_security.reposiroty.UserRepository;
 import themion7.spring_security.security.PasswordEncoder;
 
 @AllArgsConstructor
-public class UserService {
-    private final UserRepository userRepository;
-    private final RoleRepository roleRepository;
-    private final PermissionRepository permissionRepository;
+public class UserRepository {
+    private final UserDao userRepository;
+    private final RoleDao roleRepository;
+    private final PermissionDao permissionRepository;
     private final PasswordEncoder encoder;
 
     public User save(User user) {

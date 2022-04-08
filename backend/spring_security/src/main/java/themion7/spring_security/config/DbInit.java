@@ -8,13 +8,13 @@ import org.springframework.stereotype.Component;
 
 import lombok.AllArgsConstructor;
 import themion7.spring_security.domain.User;
-import themion7.spring_security.service.UserService;
+import themion7.spring_security.repository.UserRepository;
 
 @Component
 @AllArgsConstructor
 public class DbInit implements CommandLineRunner {
 
-    private final UserService service;
+    private final UserRepository service;
 
     @Override
     public void run(String... args) throws Exception {
