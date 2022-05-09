@@ -7,7 +7,7 @@ function MovieDetail({ id, medium_cover_image, title, description_full, genres }
     return (
         <div>
             <img src={medium_cover_image} alt={title} />
-            <Link to={`/movie/${id}`}><h2>{title}</h2></Link>
+            <Link to={`/web_practice/movie/${id}`}><h2>{title}</h2></Link>
             <p>{description_full}</p>
             <ul>
                 {genres.map(genre => <li key={genre}>{genre}</li>)}
