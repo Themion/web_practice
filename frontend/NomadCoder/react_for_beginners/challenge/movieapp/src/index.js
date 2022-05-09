@@ -13,10 +13,10 @@ import Detail from "./routes/Detail"
 
 ReactDOM.render(
     <React.StrictMode>
-        <Router><Routes>
-            <Route path="/web_practice/movie/:id" element={<Detail />} />
-            <Route path="/web_practice" element={<Home />} />
-            <Route path="*" element={<Navigate to="/web_practice" />} />
+        <Router basename={process.env.PUBLIC_URL}><Routes>
+            <Route path="/movie/:id" element={<Detail />} />
+            <Route path="/" element={<Home />} />
+            <Route path="*" element={<Navigate to="/" />} />
         </Routes></Router>
     </React.StrictMode>,
     document.getElementById('root')

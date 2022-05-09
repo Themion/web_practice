@@ -7,7 +7,7 @@ function Movie({ id, src, title, summary, genres }) {
     return (
         <div>
             <img src={src} alt={title} />
-            <Link to={`/web_practice/movie/${id}`}><h2>{title}</h2></Link>
+            <Link to={`/movie/${id}`}><h2>{title}</h2></Link>
             <p>{summary}</p>
             <ul>
                 {genres.map(genre => <li key={genre}>{genre}</li>)}
