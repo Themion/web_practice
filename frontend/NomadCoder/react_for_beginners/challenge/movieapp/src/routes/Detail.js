@@ -11,14 +11,17 @@ function Detail() {
     const [loading, setLoading] = useState(true)
     const [movie, setMovie] = useState({})
 
-    useEffect(async () => {
-        const json = await (await fetch(API_URL + params.id)).json()
-        setMovie(json.data.movie)
-        setLoading(false)
+    useEffect(() => {
+        const setContent = async () => {
+            const json = await (await fetch(API_URL + params.id)).json()
+            setMovie(json.data.movie)
+            setLoading(false)
+        }
+        setContent()
     }, [])
 
     return (
-        loading ? <h1>LOADING...</h1> : <MovieDetail />
+        loading ? <h1>LOADING...</h1> : <MovieDetail {...movie}/>
     )
 }
 
