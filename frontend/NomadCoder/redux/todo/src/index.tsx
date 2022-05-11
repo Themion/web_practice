@@ -1,23 +1,42 @@
-import React from 'react';
-import { createRoot } from 'react-dom/client';
-import { Provider } from 'react-redux';
-import { store } from './app/store';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import './index.css';
+import { configureStore } from "@reduxjs/toolkit";
 
-const container = document.getElementById('root')!;
-const root = createRoot(container);
+interface TodoAction {
+    type: string
+    todo: string
+}
 
-root.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <App />
-    </Provider>
-  </React.StrictMode>
-);
+const form = document.querySelector("form") as HTMLFormElement;
+const input = document.querySelector("input") as HTMLInputElement;
+const ul = document.querySelector("ul") as HTMLUListElement;
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+const ADD_TODO = "ADD_TODO";
+const DELETE_TODO = "DELETE_TODO";
+
+const reducer = (state: string[] = [], action: TodoAction) => {
+  console.log(action);
+  switch (action.type) {
+    case ADD_TODO: 
+        return state.concat([action.todo]);
+    case DELETE_TODO: 
+        return state.filter(item => item !== action.todo);
+    default: 
+        return state;
+  }
+};
+
+const store = configureStore({ reducer: reducer });
+
+const onChange = () => {
+    ul.innerHTML = ""
+    store.getState().forEach(todo => {
+        ul.innerHTML += `<li>${todo}</li>`
+    })
+}
+store.subscribe(onChange)
+
+form.onsubmit = (event) => { 
+    event.preventDefault()
+    if (input.value === "") return
+    store.dispatch({type:ADD_TODO, todo: input.value}) 
+    input.value = ""
+}
