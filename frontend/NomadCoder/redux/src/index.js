@@ -7,15 +7,18 @@ const span = document.querySelector("span");
 const TYPE_PLUS = 'plus'
 const TYPE_MINUS = 'minus'
 
-const setText = (val) => { span.innerText = val }
-
-const reducer = (state = 0, action) => {
-    if (action.type === 'plus') state++
-    if (action.type === 'minus') state--
-    setText(state)
+const countReducer = (state = 0, action) => {
+    if (action.type === TYPE_PLUS) state++
+    if (action.type === TYPE_MINUS) state--
     return state
 }
-const countStore = configureStore({ reducer: reducer })
+const countStore = configureStore({ reducer: countReducer })
+
+const setText = () => { span.innerText = countStore.getState() }
+
+countStore.subscribe(setText)
 
 plus.onclick = () => { countStore.dispatch({type: TYPE_PLUS}) }
 minus.onclick = () => { countStore.dispatch({type: TYPE_MINUS}) }
+
+setText()
