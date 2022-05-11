@@ -8,9 +8,12 @@ const TYPE_PLUS = 'plus'
 const TYPE_MINUS = 'minus'
 
 const countReducer = (state = 0, action) => {
-    if (action.type === TYPE_PLUS) state++
-    if (action.type === TYPE_MINUS) state--
-    return state
+    // action은 항상 type값을 지닌 object여야 한다
+    switch (action.type) {
+        case TYPE_PLUS: return ++state
+        case TYPE_MINUS: return --state
+        default: return state
+    }
 }
 const countStore = configureStore({ reducer: countReducer })
 
