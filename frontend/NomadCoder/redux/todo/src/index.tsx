@@ -1,15 +1,8 @@
-import { ADD_TODO, DELETE_TODO, Todo, todoStore } from "./app/TodoStore";
+import { dispatchAddTodo, dispatchDeleteTodo, todoStore } from "./app/TodoStore";
 
 const form = document.querySelector("form") as HTMLFormElement;
 const input = document.querySelector("input") as HTMLInputElement;
 const ul = document.querySelector("ul") as HTMLUListElement;
-
-const dispatchAddTodo = (todo: Todo) => {
-    todoStore.dispatch({type: ADD_TODO, todo: todo})
-}
-const dispatchDeleteTodo = (todo: Todo) => {
-    todoStore.dispatch({type: DELETE_TODO, todo: todo}) 
-}
 
 const onChange = () => {
     ul.innerHTML = ""

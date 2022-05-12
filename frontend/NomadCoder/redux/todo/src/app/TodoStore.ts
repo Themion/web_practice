@@ -25,3 +25,10 @@ const reducer = (state: Todo[] = [], action: TodoAction) => {
 };
 
 export const todoStore = configureStore({ reducer: reducer });
+
+export const dispatchAddTodo = (todo: Todo) => {
+    todoStore.dispatch({type: ADD_TODO, todo: todo})
+}
+export const dispatchDeleteTodo = (todo: Todo) => {
+    todoStore.dispatch({type: DELETE_TODO, todo: todo}) 
+}
