@@ -1,6 +1,9 @@
 import { ChangeEvent, FormEvent, useState } from "react"
+import { connect } from "react-redux"
+import { addTodo, TodoType } from "../app/TodoStore"
+import Todo from "../components/Todo"
 
-export const Home = () => {
+const Home = (props: any) => {
     const [value, setValue] = useState("")
 
     const onChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -9,9 +12,12 @@ export const Home = () => {
 
     const onSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
+        if (value === "") return
+        props.addTodo(value)
         setValue("")
     }
 
+    
     return (
         <div>
             <h1>To Dos</h1>
@@ -23,7 +29,22 @@ export const Home = () => {
                     onChange={onChange} />
                 <button>Add</button>
             </form>
-            <ul></ul>
+            <ul>
+                {props.state.map((todo: TodoType) =>
+                    <Todo key={todo.id} {...todo} />
+                )}
+            </ul>
         </div>
     )
 }
+
+const mapStateToProps = (state: any) => {
+    return { state }
+}
+const mapDispatchToProps = (dispatch: any) => {
+    return { 
+        addTodo: (text: string) => dispatch(addTodo(text))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home)
