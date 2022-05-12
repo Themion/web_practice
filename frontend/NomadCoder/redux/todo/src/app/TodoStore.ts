@@ -5,7 +5,7 @@ export interface TodoType {
     text: string
 }
 
-interface TodoAction {
+export interface TodoAction {
     type: string
     todo: TodoType
 }

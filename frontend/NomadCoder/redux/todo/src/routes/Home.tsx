@@ -1,9 +1,15 @@
+import { Dispatch } from "@reduxjs/toolkit"
 import { ChangeEvent, FormEvent, useState } from "react"
 import { connect } from "react-redux"
-import { addTodo, TodoType } from "../app/TodoStore"
+import { addTodo, TodoAction, TodoType } from "../app/TodoStore"
 import Todo from "../components/Todo"
 
-const Home = (props: any) => {
+interface Props {
+    state: TodoType[]
+    addTodo: (text: string) => TodoAction
+}
+
+const Home = (props: Props) => {
     const [value, setValue] = useState("")
 
     const onChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -17,7 +23,6 @@ const Home = (props: any) => {
         setValue("")
     }
 
-    
     return (
         <div>
             <h1>To Dos</h1>
@@ -38,10 +43,11 @@ const Home = (props: any) => {
     )
 }
 
-const mapStateToProps = (state: any) => {
+const mapStateToProps = (state: TodoType[]) => {
     return { state }
 }
-const mapDispatchToProps = (dispatch: any) => {
+
+const mapDispatchToProps = (dispatch: Dispatch) => {
     return { 
         addTodo: (text: string) => dispatch(addTodo(text))
     }
