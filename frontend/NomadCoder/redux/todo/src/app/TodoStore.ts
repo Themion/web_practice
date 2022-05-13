@@ -1,4 +1,4 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { configureStore, createAction } from "@reduxjs/toolkit";
 
 export interface TodoType {
     id: number
@@ -7,29 +7,24 @@ export interface TodoType {
 
 export interface TodoAction {
     type: string
-    todo: TodoType
+    payload: TodoType
 }
 
-const ADD_TODO = "ADD_TODO";
-const DELETE_TODO = "DELETE_TODO";
-
-const newTodo = (text: string): TodoType => {
-    return { id: new Date().getTime(), text }
-}
-
-export const addTodo = (text: string): TodoAction => {
-    return { type: ADD_TODO, todo: newTodo(text) }
-}
-export const deleteTodo = (todo: TodoType): TodoAction => {
-    return { type: DELETE_TODO, todo: todo }
-}
+export const addTodo = createAction('ADD', (text: string) => {
+    return {
+        payload: { id: new Date().getTime(), text } as TodoType
+    }
+})
+export const deleteTodo = createAction('DELETE', (id: number) => {
+    return { payload: {id, text: ""} as TodoType }
+})
 
 const reducer = (state: TodoType[] = [], action: TodoAction) => {
     switch (action.type) {
-        case ADD_TODO:
-            return [ action.todo, ...state ]
-        case DELETE_TODO:
-            return state.filter(item => item.id !== action.todo.id);
+        case addTodo.type:
+            return [ action.payload, ...state ]
+        case deleteTodo.type:
+            return state.filter(item => item.id !== action.payload.id);
         default:
             return state;
     }

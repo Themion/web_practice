@@ -22,7 +22,7 @@ const Todo = (props: Props) => {
 const mapDispatchToProps = (dispatch: Dispatch, ownProps: TodoType) => {
     return {
         todo: ownProps,
-        deleteTodo: () => dispatch(deleteTodo(ownProps))
+        deleteTodo: () => dispatch(deleteTodo(ownProps.id))
     }
 }
 
