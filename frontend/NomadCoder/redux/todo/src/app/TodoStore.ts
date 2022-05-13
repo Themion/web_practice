@@ -1,4 +1,4 @@
-import { configureStore, createAction, createReducer } from "@reduxjs/toolkit";
+import { configureStore, createSlice } from "@reduxjs/toolkit";
 
 export interface TodoType {
     id: number
@@ -10,18 +10,22 @@ export interface TodoAction {
     payload: TodoType
 }
 
-export const addTodo = createAction('ADD', (text: string) => {
-    return { payload: { id: new Date().getTime(), text } as TodoType }
-})
-export const deleteTodo = createAction('DELETE', (id: number) => {
-    return { payload: {id, text: ""} as TodoType }
+export const newTodo = (text: string): TodoType => {
+    return {
+        text,
+        id: new Date().getTime()
+    }
+}
+
+export const slice = createSlice({
+    name: "todoReducer",
+    initialState: [] as TodoType[],
+    reducers: {
+        add: (state: TodoType[], action: TodoAction) => 
+            [action.payload, ...state],
+        delete: (state: TodoType[], action: TodoAction) => 
+            state.filter(item => item.id !== action.payload.id)
+    }
 })
 
-const reducer = createReducer([] as TodoType[], {
-    [addTodo.type]: (state: TodoType[], action: TodoAction) => 
-        [action.payload, ...state],
-    [deleteTodo.type]: (state: TodoType[], action: TodoAction) => 
-        state.filter(item => item.id !== action.payload.id)
-})
-
-export const todoStore = configureStore({ reducer: reducer });
+export const todoStore = configureStore({ reducer: slice.reducer });

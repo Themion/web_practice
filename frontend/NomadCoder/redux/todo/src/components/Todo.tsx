@@ -1,7 +1,7 @@
 import { Dispatch } from "@reduxjs/toolkit"
 import { connect } from "react-redux"
 import { Link } from "react-router-dom"
-import { deleteTodo, TodoType } from "../app/TodoStore"
+import { slice, TodoType } from "../app/TodoStore"
 
 interface Props {
     todo: TodoType,
@@ -22,7 +22,7 @@ const Todo = (props: Props) => {
 const mapDispatchToProps = (dispatch: Dispatch, ownProps: TodoType) => {
     return {
         todo: ownProps,
-        deleteTodo: () => dispatch(deleteTodo(ownProps.id))
+        deleteTodo: () => dispatch(slice.actions.delete(ownProps))
     }
 }
 

@@ -1,7 +1,7 @@
 import { Dispatch } from "@reduxjs/toolkit"
 import { ChangeEvent, FormEvent, useState } from "react"
 import { connect } from "react-redux"
-import { addTodo, TodoAction, TodoType } from "../app/TodoStore"
+import { newTodo, slice, TodoAction, TodoType } from "../app/TodoStore"
 import Todo from "../components/Todo"
 
 interface Props {
@@ -49,7 +49,7 @@ const mapStateToProps = (state: TodoType[]) => {
 
 const mapDispatchToProps = (dispatch: Dispatch) => {
     return { 
-        addTodo: (text: string) => dispatch(addTodo(text))
+        addTodo: (text: string) => dispatch(slice.actions.add(newTodo(text)))
     }
 }
 
