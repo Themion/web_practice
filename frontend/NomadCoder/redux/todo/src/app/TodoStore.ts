@@ -11,10 +11,7 @@ export interface TodoAction {
 }
 
 export const newTodo = (text: string): TodoType => {
-    return {
-        text,
-        id: new Date().getTime()
-    }
+    return { text, id: new Date().getTime() }
 }
 
 export const slice = createSlice({
