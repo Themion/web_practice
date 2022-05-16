@@ -20,7 +20,7 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
             // 해당 경로는 내장된 STOMP broker가 관리
             .enableSimpleBroker("/topic");
     }
-
+ 
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
         // SockJS를 이용해 연결을 유지할 경로
