@@ -1,4 +1,4 @@
-package themion.spring_websocket.spring_websocket;
+package themion7.spring_websocket.spring_websocket;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
