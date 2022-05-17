@@ -18,26 +18,26 @@ public class MessageController {
 
     private NotificationService notificationService;
 
-    @MessageMapping("/message")
-    @SendTo("/topic/messages")
+    @MessageMapping("/public")
+    @SendTo("/topic/public")
     public MessageDTO getMessage(final MessageDTO dto) {
-        dto.setContent(HtmlUtils.htmlEscape(dto.getContent()));
         notificationService.sendPublicNotification();
+        dto.setContent(HtmlUtils.htmlEscape(dto.getContent()));
         return dto;
     }
 
-    @MessageMapping("/private_message")
-    @SendToUser("/topic/private_messages")
+    @MessageMapping("/private")
+    @SendToUser("/topic/private")
     public MessageDTO getPrvateMessage(
         final MessageDTO dto,
         final Principal principal
     ) {
+        notificationService.sendPrivateNotification(principal.getName());
         dto.setContent(
             "Sending private message to user " +
             principal.getName() + ": " +
             HtmlUtils.htmlEscape(dto.getContent())
         );
-        notificationService.sendPrivateNotification(principal.getName());
         return dto;
     }
 }

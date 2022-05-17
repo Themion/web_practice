@@ -1,10 +1,10 @@
 const WebSocketServer = '/websocket'
-const WebSocketPublicResponse = '/topic/messages'
-const WebSocketPrivateResponse = '/user/topic/private_messages'
-const WebSocketPublicRequest = '/ws/message'
-const WebSocketPrivateRequest = '/ws/private_message'
-const PublicNotification = '/topic/public_notification'
-const PrivateNotification = '/user/topic/private_notification'
+const WebSocketPublicResponse = '/topic/public'
+const WebSocketPrivateResponse = '/user/topic/private'
+const WebSocketPublicRequest = '/ws/public'
+const WebSocketPrivateRequest = '/ws/private'
+const PublicNotification = '/topic/notification/public'
+const PrivateNotification = '/user/topic/notification/private'
 
 let stompClient;
 let notificationCount = 0
@@ -36,7 +36,8 @@ const connect = () => {
         stompClient.subscribe(WebSocketPrivateResponse, (message) => {
             showMessage(JSON.parse(message.body).content)
         })
-        stompClient.subscribe(PublicNotification, () => {
+        stompClient.subscribe(PublicNotification, (message) => {
+            console.log("public notification : " + message)
             updateNotification(notificationCount + 1)
         })
         stompClient.subscribe(PrivateNotification, () => {

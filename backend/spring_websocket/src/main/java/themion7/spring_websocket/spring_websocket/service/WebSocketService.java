@@ -11,23 +11,20 @@ import themion7.spring_websocket.spring_websocket.dto.MessageDTO;
 public class WebSocketService {
 
     private final SimpMessagingTemplate messagingTemplate;
-    private final NotificationService notificationService;
 
     public void notifyFrontend(final String message) {
         MessageDTO messageDTO = new MessageDTO(message);
-        notificationService.sendPublicNotification();
         messagingTemplate.convertAndSend(
-            "/topic/messages",
+            "/topic/public",
             messageDTO
         );
     }
 
     public void notifyUser(final String user, final String message) {
         MessageDTO messageDTO = new MessageDTO(message);
-        notificationService.sendPrivateNotification(user);
         messagingTemplate.convertAndSendToUser(
             user,
-            "/topic/private_messages",
+            "/topic/private",
             messageDTO
         );
     }

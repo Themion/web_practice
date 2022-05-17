@@ -18,7 +18,7 @@ public class NotificationService {
         );
 
         messagingTemplate.convertAndSend(
-            "/topic/public_notification",
+            "/topic/notification/public",
             messageDTO
         );
     }
@@ -30,7 +30,7 @@ public class NotificationService {
 
         messagingTemplate.convertAndSendToUser(
             user,
-            "/topic/private_notification",
+            "/topic/notification/private",
             messageDTO
         );
     }
