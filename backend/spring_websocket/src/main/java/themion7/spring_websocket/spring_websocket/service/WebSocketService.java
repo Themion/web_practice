@@ -14,7 +14,18 @@ public class WebSocketService {
 
     public void notifyFrontend(final String message) {
         MessageDTO messageDTO = new MessageDTO(message);
-        messagingTemplate.convertAndSend("/topic/messages", messageDTO);
+        messagingTemplate.convertAndSend(
+            "/topic/messages",
+            messageDTO
+        );
     }
-    
+
+    public void notifyUser(final String user, final String message) {
+        MessageDTO messageDTO = new MessageDTO(message);
+        messagingTemplate.convertAndSendToUser(
+            user,
+            "/topic/private_messages",
+            messageDTO);
+    }
+
 }

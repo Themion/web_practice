@@ -6,6 +6,8 @@ import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBr
 import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
 import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerConfigurer;
 
+import themion7.spring_websocket.spring_websocket.handler.UserHandshakeHandler;
+
 @Configuration
 @EnableWebSocketMessageBroker
 public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
@@ -24,6 +26,9 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
         // SockJS를 이용해 연결을 유지할 경로
-        registry.addEndpoint("/websocket").withSockJS();
+        registry
+            .addEndpoint("/websocket")
+                .setHandshakeHandler(new UserHandshakeHandler())
+                .withSockJS();
     }
 }

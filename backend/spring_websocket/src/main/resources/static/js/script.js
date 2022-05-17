@@ -1,6 +1,8 @@
 const WebSocketServer = '/websocket'
-const WebSocketSubscribe = '/topic/messages'
-const WebSocketSend = '/ws/message'
+const WebSocketPublicResponse = '/topic/messages'
+const WebSocketPrivateResponse = '/user/topic/private_messages'
+const WebSocketPublicRequest = '/ws/message'
+const WebSocketPrivateRequest = '/ws/private_message'
 
 let stompClient;
 
@@ -18,20 +20,38 @@ const connect = () => {
     stompClient = Stomp.over(socket)
     stompClient.connect({}, (frame) => {
         console.log('Connected: ' + frame)
-        stompClient.subscribe(WebSocketSubscribe, (message) => {
+        stompClient.subscribe(WebSocketPublicResponse, (message) => {
+            showMessage(JSON.parse(message.body).content)
+        })
+        stompClient.subscribe(WebSocketPrivateResponse, (message) => {
             showMessage(JSON.parse(message.body).content)
         })
     })
 }
 
-const sendMessage = (event) => {
-    const input = document.getElementById('input')
+const sendPublicMessage = (event) => {
+    const input = event.target.querySelector('input')
 
     event.preventDefault()
 
     console.log('sending message...')
     stompClient.send(
-        WebSocketSend, 
+        WebSocketPublicRequest, 
+        {}, 
+        JSON.stringify({'content': input.value})
+    )
+
+    input.value = ""
+}
+
+const sendPrivateMessage = (event) => {
+    const input = event.target.querySelector('input')
+
+    event.preventDefault()
+
+    console.log('sending message...')
+    stompClient.send(
+        WebSocketPrivateRequest, 
         {}, 
         JSON.stringify({'content': input.value})
     )
@@ -40,8 +60,10 @@ const sendMessage = (event) => {
 }
 
 const init = () => {
-    const form = document.getElementById('form')
-    form.onsubmit = sendMessage
+    const public = document.getElementById('public')
+    public.onsubmit = sendPublicMessage
+    const private = document.getElementById('private')
+    private.onsubmit = sendPrivateMessage
 
     connect()
 }
