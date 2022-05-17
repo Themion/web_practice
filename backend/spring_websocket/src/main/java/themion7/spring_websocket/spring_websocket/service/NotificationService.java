@@ -8,28 +8,30 @@ import themion7.spring_websocket.spring_websocket.dto.MessageDTO;
 
 @AllArgsConstructor
 @Service
-public class WebSocketService {
+public class NotificationService {
 
     private final SimpMessagingTemplate messagingTemplate;
-    private final NotificationService notificationService;
 
-    public void notifyFrontend(final String message) {
-        MessageDTO messageDTO = new MessageDTO(message);
-        notificationService.sendPublicNotification();
+    public void sendPublicNotification() {
+        MessageDTO messageDTO = new MessageDTO(
+            "Public Notification"
+        );
+
         messagingTemplate.convertAndSend(
-            "/topic/messages",
+            "/topic/public_notification",
             messageDTO
         );
     }
 
-    public void notifyUser(final String user, final String message) {
-        MessageDTO messageDTO = new MessageDTO(message);
-        notificationService.sendPrivateNotification(user);
+    public void sendPrivateNotification(final String user) {
+        MessageDTO messageDTO = new MessageDTO(
+            "Private Notification"
+        );
+
         messagingTemplate.convertAndSendToUser(
             user,
-            "/topic/private_messages",
+            "/topic/private_notification",
             messageDTO
         );
     }
-
 }
