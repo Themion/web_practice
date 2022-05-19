@@ -6,7 +6,7 @@ use mySQL;
 create table topic (
     id int not null auto_increment,
     title varchar(100) not null,
-    description text(65535) not null,
+    description text(65535) null,
     created datetime not null,
     author_id int null,
     primary key (id)
@@ -28,7 +28,7 @@ insert into topic (title, description, created, author_id)
 insert into topic (title, description, created, author_id) 
     values('SQL Server', 'SQL Server is ...', NOW(), 2);
 insert into topic (title, description, created, author_id) 
-    values('PostgreSQL', 'PostgreSQL is ...', NOW()), 3;
+    values('PostgreSQL', 'PostgreSQL is ...', NOW(), 3);
 insert into topic (title, description, created, author_id) 
     values('MongoDB', 'MongoDB is ...', NOW(), 1);
 
@@ -48,5 +48,5 @@ select * from topic
 
 delete from topic where id = 4;
 
-select * from topic;
-select * from author;
+select * from topic left join author on topic.author_id = author.id;
+select topic.id, title, description, created, name, profile from topic left join author on topic.author_id = author.id;
