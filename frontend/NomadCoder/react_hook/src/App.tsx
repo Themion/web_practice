@@ -1,13 +1,10 @@
-import { useState } from "react";
+import { useInput } from "./hooks/useInput";
 
 const App = () => {
-    const [item, setItem] = useState(0)
-    const incrementItem = () => { setItem(item + 1) }
-    const decrementItem = () => { setItem(item - 1) }
+    const name = useInput("Mr.")
+
     return <div className="App">
-        {item}<br />
-        <button onClick={incrementItem}>+</button>
-        <button onClick={decrementItem}>-</button>
+        <input placeholder="name" {...name} />
     </div>
 }
 
