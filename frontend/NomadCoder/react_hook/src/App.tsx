@@ -1,12 +1,10 @@
 import { useInput } from "./hooks/useInput";
 
 const App = () => {
-    const maxLength = (str: string) => str.length <= 10;
-
-    const name = useInput("", maxLength)
+    const validator = (str: string) => !str.includes('@');
 
     return <div className="App">
-        <input placeholder="name" {...name} />
+        <input placeholder="name" {...useInput("", validator)} />
     </div>
 }
 
