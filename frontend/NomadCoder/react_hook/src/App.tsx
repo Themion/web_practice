@@ -1,7 +1,9 @@
 import { useInput } from "./hooks/useInput";
 
 const App = () => {
-    const name = useInput("Mr.")
+    const maxLength = (str: string) => str.length <= 10;
+
+    const name = useInput("", maxLength)
 
     return <div className="App">
         <input placeholder="name" {...name} />
