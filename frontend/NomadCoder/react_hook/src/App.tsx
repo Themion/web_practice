@@ -1,26 +1,15 @@
-import { useTabs } from "./hooks/useTabs";
-import { Content } from "./types/types";
-
-const contents: Content[] = [
-    {
-        tab: "Section 1",
-        content: "Content of Section 1"
-    },
-    {
-        tab: "Section 2",
-        content: "Content of Section 2"
-    },
-]
+import { useEffect, useState } from "react";
 
 const App = () => {
-    const {currentItem, changeItem} = useTabs(0, contents)
+    const [a, setA] = useState(0)
+    const [b, setB] = useState(0)
+    useEffect(() => {
+        console.log('useEffect')
+    }, [a])
+
     return <div className="App">
-        {contents.map((section: Content, index: number) => (
-            <button onClick={() => changeItem(index)}>
-                {section.tab}
-            </button>
-        ))}
-        <div>{currentItem.content}</div>
+        <button onClick={() => {setA(a + 1)}}>{a}</button>
+        <button onClick={() => {setB(b + 1)}}>{b}</button>
     </div>
 }
 
