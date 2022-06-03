@@ -1,15 +1,10 @@
-import { useEffect, useState } from "react";
+import { useTitle } from "./hooks/useTitle";
 
 const App = () => {
-    const [a, setA] = useState(0)
-    const [b, setB] = useState(0)
-    useEffect(() => {
-        console.log('useEffect')
-    }, [a])
-
+    const setTitle = useTitle("Loading...")
+    setTimeout(() => setTitle("Home"), 5000)
     return <div className="App">
-        <button onClick={() => {setA(a + 1)}}>{a}</button>
-        <button onClick={() => {setB(b + 1)}}>{b}</button>
+        <h1>Hello</h1>
     </div>
 }
 
