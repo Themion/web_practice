@@ -1,10 +1,15 @@
-import { useTitle } from "./hooks/useTitle";
+import { useClick } from "./hooks/useClick";
+import { OnMouseEvent } from "./types/types";
 
 const App = () => {
-    const setTitle = useTitle("Loading...")
-    setTimeout(() => setTitle("Home"), 5000)
+    const onClick: OnMouseEvent = () => {
+        console.log("debug")
+    }
+
+    const title = useClick<HTMLHeadingElement>(onClick)
+
     return <div className="App">
-        <h1>Hello</h1>
+        <h1 ref={title}>Hello</h1>
     </div>
 }
 
