@@ -1,10 +1,9 @@
-import usePreventLeave from "./hooks/usePreventLeave";
+import useBeforeLeave from "./hooks/useBeforeLeave";
 
 const App = () => {
-    const { enablePrevent, disablePrevent } = usePreventLeave()
+    const begForLife = () => console.log("Don't leave!")
+    useBeforeLeave(begForLife)
     return <div className="App">
-        <button onClick={enablePrevent}>Protect</button>
-        <button onClick={disablePrevent}>Unprotect</button>
     </div>
 }
 
