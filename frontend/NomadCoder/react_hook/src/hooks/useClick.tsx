@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react"
 import { OnMouseEvent } from "../types/types"
 
-export const useClick = <T extends HTMLElement>(onClick: OnMouseEvent) => {
+const useClick = <T extends HTMLElement>(onClick: OnMouseEvent) => {
     const ClickEvent = 'click'
     const element = useRef<T>(null)
 
@@ -17,3 +17,5 @@ export const useClick = <T extends HTMLElement>(onClick: OnMouseEvent) => {
 
     return element
 }
+
+export default useClick

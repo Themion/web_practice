@@ -1,15 +1,10 @@
-import { useClick } from "./hooks/useClick";
-import { OnMouseEvent } from "./types/types";
+import usePreventLeave from "./hooks/usePreventLeave";
 
 const App = () => {
-    const onClick: OnMouseEvent = () => {
-        console.log("debug")
-    }
-
-    const title = useClick<HTMLHeadingElement>(onClick)
-
+    const { enablePrevent, disablePrevent } = usePreventLeave()
     return <div className="App">
-        <h1 ref={title}>Hello</h1>
+        <button onClick={enablePrevent}>Protect</button>
+        <button onClick={disablePrevent}>Unprotect</button>
     </div>
 }
 
