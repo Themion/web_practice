@@ -2,13 +2,12 @@ import { useEffect, useState } from "react"
 
 const useNetwork = (onChange?: Function) => {
     const [status, setStatus] = useState(navigator.onLine)
+    const handleChange = () => {
+        if (onChange) onChange(navigator.onLine)
+        setStatus(navigator.onLine)
+    }
 
     useEffect(() => {
-        const handleChange = () => {
-            if (onChange) onChange(navigator.onLine)
-            setStatus(navigator.onLine)
-        }
-
         window.addEventListener('online', handleChange)
         window.addEventListener('offline', handleChange)
 

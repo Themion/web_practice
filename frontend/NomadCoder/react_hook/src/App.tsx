@@ -1,13 +1,20 @@
-import useNetwork from "./hooks/useNetwork";
+import useFullscreen from "./hooks/useFullscreen";
 
 const App = () => {
-    const handleNetworkChange = (onLine: boolean) => {
-        console.log(onLine ? "we just went online" : "we are offline")
+    const onFullscreen = (isFull: boolean) => {
+        console.log(isFull)
     }
-    const onLine = useNetwork(handleNetworkChange)
+    const { element, triggerFull, exitFull } = useFullscreen<HTMLImageElement>(onFullscreen)
 
-    return <div className="App">
-        <h1>{onLine ? 'online' : 'offline'}</h1>
+    return <div className="App" style={{height: '1000vh'}}>
+        <img 
+            ref={element} 
+            onClick={exitFull}
+            style={{width: '300px'}} 
+            src="img/img.jpg" 
+            alt="" />
+        <br />
+        <button onClick={triggerFull}>Fullscrean</button>
     </div>
 }
 
