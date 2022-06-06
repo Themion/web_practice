@@ -1,20 +1,12 @@
-import useFullscreen from "./hooks/useFullscreen";
+import useNotification from "./hooks/useNotification";
 
 const App = () => {
-    const onFullscreen = (isFull: boolean) => {
-        console.log(isFull)
-    }
-    const { element, triggerFull, exitFull } = useFullscreen<HTMLImageElement>(onFullscreen)
-
-    return <div className="App" style={{height: '1000vh'}}>
-        <img 
-            ref={element} 
-            onClick={exitFull}
-            style={{width: '300px'}} 
-            src="img/img.jpg" 
-            alt="" />
-        <br />
-        <button onClick={triggerFull}>Fullscrean</button>
+    const trigger = useNotification('Testing notification', {
+        body: 'this is body'
+    })
+    return <div className="App">
+        <h1>Hello</h1>
+        <button onClick={trigger}>useNotification</button>
     </div>
 }
 
