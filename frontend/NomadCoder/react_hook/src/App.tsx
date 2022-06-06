@@ -1,12 +1,15 @@
-import useNotification from "./hooks/useNotification";
+import useAxios from "./hooks/useAxios";
 
 const App = () => {
-    const trigger = useNotification('Testing notification', {
-        body: 'this is body'
+    const { loading, error, data, refetch } = useAxios({
+        url: 'https://yts.mx/api/v2/list_movies.json'
     })
+
+    console.log({ loading, error, data, refetch })
+
     return <div className="App">
-        <h1>Hello</h1>
-        <button onClick={trigger}>useNotification</button>
+        <h1>{data && data.status}</h1>
+        <button onClick={refetch}>refetch</button>
     </div>
 }
 
