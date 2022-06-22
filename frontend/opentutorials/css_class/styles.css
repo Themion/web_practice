@@ -5,11 +5,18 @@ html {
 div {
     border: 5px solid tomato;
     margin: 10px;
+    width: 300px;
+}
+
+#parent {
+    position: absolute;
+    left: 100px;
+    top: 100px;
 }
 
 #child {
     box-sizing: content-box;
-    position: relative;
+    position: absolute;
     left: 100px;
     top: 100px;
 }
