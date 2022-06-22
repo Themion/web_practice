@@ -1,0 +1,15 @@
+html {
+    border: 1px sold gray;
+}
+
+div {
+    border: 5px solid tomato;
+    margin: 10px;
+}
+
+#child {
+    box-sizing: content-box;
+    position: relative;
+    left: 100px;
+    top: 100px;
+}

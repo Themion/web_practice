@@ -34,6 +34,7 @@ const useAxios = (opts: AxiosRequestHeaders, axiosClient = axios) => {
             })
     }
     
+    // eslint-disable-next-line
     useEffect(() => { callback() }, [trigger])
 
     return { ...state, refetch }
