@@ -1,0 +1,12 @@
+.container {
+    background-color: powderblue;
+    height: 300px;
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+.item {
+    background-color: tomato;
+    color: white;
+    border: 1px solid white;
+}
