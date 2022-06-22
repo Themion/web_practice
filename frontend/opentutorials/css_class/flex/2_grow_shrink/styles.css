@@ -1,0 +1,22 @@
+.container {
+    background-color: powderblue;
+    height: 300px;
+    display: flex;
+}
+
+.item {
+    background-color: tomato;
+    color: white;
+    border: 1px solid white;
+    /* flex-grow: 1; */
+}
+
+.item:nth-child(1) {
+    flex-basis: 300px;
+    flex-shrink: 1;
+}
+
+.item:nth-child(2) {
+    flex-basis: 450px;
+    flex-shrink: 2;
+}
