@@ -1,15 +1,48 @@
-@media (min-width: 600px) {
-    body {
-        background-color: blue;
-    }
+.container {
+    display: flex;
+    flex-direction: column;
 }
-@media (max-width: 600px) {
-    body {
-        background-color: green;
-    }
+
+header {
+    border-bottom: 1px solid gray;
+    padding-right: 20px;
 }
-@media (max-width: 500px) {
-    body {
-        background-color: red;
+
+footer {
+    border-top: 1px solid gray;
+    padding: 20px;
+    text-align: center;
+}
+
+.content {
+    display: flex;
+}
+
+.content nav {
+    border-right: 1px solid gray;
+}
+
+.content aside {
+    border-left: 1px solid gray;
+}
+
+nav, aside {
+    flex-basis: 150px;
+    flex-shrink: 0;
+}
+
+main {
+    padding: 10px
+}
+
+@media(min-width: 500px) {
+    .content {
+        flex-direction: column;
+    }
+
+    .content nav ,
+    .content aside {
+        border: 0;
+        flex-basis: auto;
     }
 }
