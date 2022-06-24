@@ -1,0 +1,18 @@
+img {
+    -webkit-filter: grayscale(100%) blur(3px);
+    -o-filter: grayscale(100%) blur(3px);
+    filter: grayscale(100%) blur(3px);
+    transition: all 1s;
+}
+
+img:hover {
+    -webkit-filter: grayscale(0%) blur(0px);
+    -o-filter: grayscale(0%) blur(0px);
+    filter: grayscale(0%) blur(0px);
+}
+
+h1 {
+    -webkit-filter: blur(3px);
+    -o-filter: blur(3px);
+    filter: blur(3px);
+}
