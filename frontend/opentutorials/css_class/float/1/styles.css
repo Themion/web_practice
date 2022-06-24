@@ -1,0 +1,13 @@
+img {
+    width: 400px;
+    float: right;
+    margin: 20px;
+}
+
+p {
+    border: 1px solid gray;
+}
+
+.cls {
+    clear: both;
+}
