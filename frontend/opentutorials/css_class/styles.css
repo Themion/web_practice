@@ -1,26 +1,7 @@
-html {
-    border: 10px sold gray;
-}
-
-div {
-    border: 5px solid tomato;
-    margin: 10px;
-}
-
-#child {
-    background-color: black;
-    border: 0px;
-    color: white;
-    position: fixed;
-    text-align: center;
-    width: 100%;
-    left: 0;
-    bottom: 0;
-    margin: 0;
-}
-
-#large {
-    height: 1000000px;
-    background-color: tomato;
-    color: white;
+.column {
+    text-align: justify;
+    column-count: 4;
+    column-width: 200px;
+    column-gap: 50px;
+    column-rule-style: dotted;
 }
