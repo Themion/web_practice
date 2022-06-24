@@ -1,0 +1,9 @@
+a {
+    font-size: 3rem;
+    display: inline-block;
+    transition: all 100ms;
+}
+a:active {
+    transform: translate(1rem, 1rem);
+    font-size: 2rem;
+}
