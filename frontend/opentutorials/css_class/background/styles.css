@@ -1,0 +1,10 @@
+div {
+    border: 5px solid gray;
+    height: 600px;
+    /* background-image: url(img.jpg);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center; */
+    background: url(img.jpg) no-repeat fixed center; 
+    background-size: cover;
+}
