@@ -1,0 +1,39 @@
+.container {
+    width: 592px;
+    border: 1px solid gray;
+    margin: auto;
+}
+
+header {
+    border-bottom: 1px solid gray;
+    padding-left: 10px;
+}
+
+nav, article, aside {
+    float: left;
+}
+
+nav {
+    border-right: 1px solid gray;
+    width: 120px;
+}
+
+article {
+    border-left: 1px solid gray;
+    border-right: 1px solid gray;
+    width: 400px;
+    padding: 10px;
+    margin-left: -1px;
+}
+
+aside {
+    border-left: 1px solid gray;
+    margin-left: -1px;
+    width: 50px;
+}
+
+footer {
+    border-top: 1px solid gray;
+    clear: both;
+    text-align: center;
+}
