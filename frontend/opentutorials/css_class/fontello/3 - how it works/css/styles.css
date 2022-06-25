@@ -1,0 +1,9 @@
+#test:before {
+    content: ":before ";
+    font-size: 1.5rem;
+}
+
+#test:after {
+    content: " :after";
+    color: red;
+}
