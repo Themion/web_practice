@@ -13,9 +13,10 @@
     </div>
 
     <div v-for="(product, i) in products" :key="i">
-        <img class="room-img" :src="product.img" @click="modal = true">
-        <h4 :style="style">{{ i + 1 }}: {{ product.name }}</h4>
+        <img class="room-img" :src="product.image" @click="modal = true">
+        <h4 :style="style">{{ product.id }}: {{ product.title }}</h4>
         <p>{{ product.price }}만원</p>
+        <p>{{ product.content }}</p>
         <button @click="report(product)">허위매물 신고</button>
         <span @mouseover="log">신고 수: {{ product.report }}</span>
     </div>
@@ -24,15 +25,13 @@
 
 <script>
 
+import products from '@/assets/data'
+
 export default {
     name: 'App',
     data() {
         return {
-            products: [
-                { name: '역삼동원룸', price: 60, report: 0, img: require('@/assets/room/room0.jpg') }, 
-                { name: '천호동원룸', price: 70, report: 0, img: require('@/assets/room/room1.jpg') }, 
-                { name: '마포구원룸', price: 55, report: 0, img: require('@/assets/room/room2.jpg') }, 
-            ],
+            products: products,
             menus: ['Home', 'Shop', 'About'],
             style: 'color: blue;',
             modal: false,
