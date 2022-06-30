@@ -11,40 +11,15 @@ app.innerHTML = `
 // ---------------------------
 
 
-type Add = {
-    (a: number, b: number): number
-    (a: number, b: number, c: number): number
+type SuperPrint = {
+    <T>(arr: T[]): void
 }
 
-// const add: Add = (a, b, c) => {
-const add: Add = (a, b, c?: number) => {
-    if (c) return a + b + c
-    return a + b
+const superPrint: SuperPrint = (arr) => {
+    arr.forEach(i => console.log(i))
 }
 
-console.log(add(1, 2))
-console.log(add(1, 2, 3))
-
-
-
-type Config = {
-    path: string,
-    state: object,
-}
-
-type Push = {
-    (path: string): void
-    (config: Config): void
-}
-
-const push: Push = (config) => {
-    if (typeof config === 'string') console.log(config)
-    else console.log(config.path, config.state)
-}
-
-const config: Config = {
-    path: "/home",
-    state: {val: 1}
-}
-
-push(config)
+superPrint([1, 2, 3, 4, 5])
+superPrint([true, true, false, false, false])
+superPrint(["a", "b", "c"])
+superPrint(["a", "b", "c", 1, 2, false])
