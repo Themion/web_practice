@@ -10,32 +10,35 @@ app.innerHTML = `
 
 // ---------------------------
 
+type Words = {
+    [key: string]: string
+}
 
-abstract class User {
+class Word {
     constructor(
-        private firstName: string,
-        protected lastName: string,
-        public nickname: string
+        public term: string,
+        public def: string
     ) {}
+}
 
-    private getNickname() { return this.nickname }
+class Dict {
+    private words: Words
+    constructor() {
+        this.words = {} 
+    }
 
-    abstract getLastname(): void
+    add(word: Word) {
+        if (!this.words[word.term])
+            this.words[word.term] = word.def
+    }
 
-    getFullName() {
-        return `${this.firstName} ${this.lastName}`
+    def(term: string) {
+        return this.words[term]
     }
 }
 
+const word: Word = new Word("term", "def")
+const dict = new Dict()
 
-class Player extends User {
-    getLastname(): void {
-        console.log(this.lastName)
-    }
-}
-
-// const user = new User('first', 'last', 'user')
-const nick = new Player('first', 'last', 'nick');
-
-// console.log(nick.getNickname())
-console.log(nick.getFullName())
+dict.add(word)
+console.log(dict.def(word.term))
