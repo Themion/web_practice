@@ -11,15 +11,31 @@ app.innerHTML = `
 // ---------------------------
 
 
-type SuperPrint = {
-    <T>(arr: T[]): void
+abstract class User {
+    constructor(
+        private firstName: string,
+        protected lastName: string,
+        public nickname: string
+    ) {}
+
+    private getNickname() { return this.nickname }
+
+    abstract getLastname(): void
+
+    getFullName() {
+        return `${this.firstName} ${this.lastName}`
+    }
 }
 
-const superPrint: SuperPrint = (arr) => {
-    arr.forEach(i => console.log(i))
+
+class Player extends User {
+    getLastname(): void {
+        console.log(this.lastName)
+    }
 }
 
-superPrint([1, 2, 3, 4, 5])
-superPrint([true, true, false, false, false])
-superPrint(["a", "b", "c"])
-superPrint(["a", "b", "c", 1, 2, false])
+// const user = new User('first', 'last', 'user')
+const nick = new Player('first', 'last', 'nick');
+
+// console.log(nick.getNickname())
+console.log(nick.getFullName())
