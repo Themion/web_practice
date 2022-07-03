@@ -9,7 +9,8 @@
 </head>
 <body>
   <div id="root">
-    <button>button</button>
+    <div v-if="liked">Like button was hit!</div>
+    <button v-else v-on:click="setLike">button</button>
   </div>
   <script>
     const app = new Vue({
