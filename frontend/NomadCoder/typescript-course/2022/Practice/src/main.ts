@@ -10,35 +10,22 @@ app.innerHTML = `
 
 // ---------------------------
 
-type Words = {
-    [key: string]: string
+interface User {
+    name: string
 }
 
-class Word {
-    constructor(
-        public term: string,
-        public def: string
-    ) {}
+interface User {
+    lastName: string
 }
 
-class Dict {
-    private words: Words
-    constructor() {
-        this.words = {} 
-    }
-
-    add(word: Word) {
-        if (!this.words[word.term])
-            this.words[word.term] = word.def
-    }
-
-    def(term: string) {
-        return this.words[term]
-    }
+interface User {
+    age: number
 }
 
-const word: Word = new Word("term", "def")
-const dict = new Dict()
+const nick: User = {
+    name: 'nick',
+    lastName: 'lastName',
+    age: 20
+}
 
-dict.add(word)
-console.log(dict.def(word.term))
+console.log(nick)
