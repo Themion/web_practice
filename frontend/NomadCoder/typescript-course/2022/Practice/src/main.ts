@@ -11,21 +11,25 @@ app.innerHTML = `
 // ---------------------------
 
 interface User {
-    name: string
+    firstname: string
+    lastname: string
+    sayHi: (name: string) => string
+    fullName: () => string
 }
 
-interface User {
-    lastName: string
+interface Human {
+    health: number
 }
 
-interface User {
-    age: number
+class Player implements User, Human {
+    constructor(
+        public firstname: string,
+        public lastname: string,
+        public health: number
+     ) { }
+    fullName() { return `${this.firstname} ${this.lastname}` }
+    sayHi(name: string) { return `Hello ${name}. My name is ${this.fullName()}` }
 }
 
-const nick: User = {
-    name: 'nick',
-    lastName: 'lastName',
-    age: 20
-}
-
-console.log(nick)
+const player: Player = new Player("nick", "holand", 10)
+console.log(player.sayHi("console"))
