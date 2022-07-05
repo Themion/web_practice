@@ -10,26 +10,20 @@ app.innerHTML = `
 
 // ---------------------------
 
-interface User {
-    firstname: string
-    lastname: string
-    sayHi: (name: string) => string
-    fullName: () => string
+interface Storage<T> {
+    [key: string]: T
 }
 
-interface Human {
-    health: number
-}
-
-class Player implements User, Human {
+class LocalStorage<T> {
     constructor(
-        public firstname: string,
-        public lastname: string,
-        public health: number
-     ) { }
-    fullName() { return `${this.firstname} ${this.lastname}` }
-    sayHi(name: string) { return `Hello ${name}. My name is ${this.fullName()}` }
+        private storage: Storage<T> = {}
+    ) {}
+
+    set(key: string, value: T) { this.storage[key] = value }
+    get(key: string) { return this.storage[key] }
+    clearKey(key: string) { delete this.storage[key]}
+    clear() { this.storage = {} }
 }
 
-const player: Player = new Player("nick", "holand", 10)
-console.log(player.sayHi("console"))
+const localStorage = new LocalStorage<any>()
+localStorage.set('hello', 'world')
