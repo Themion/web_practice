@@ -25,3 +25,30 @@ class Block implements BlockShape {
             .digest("hex")
     }
 }
+
+class BlockChain {
+    private blocks: Block[]
+    constructor() { this.blocks = [] }
+    
+    public getBlocks() { return [...this.blocks] }
+    public getLength() { return this.getBlocks().length }
+    public getLastHash() { 
+        if (this.getLength() === 0) return ""    
+        return this.blocks[this.getLength() - 1].hash
+    }
+    public addBlock(data: string) {
+        this.blocks.push(new Block(
+            this.getLastHash(), 
+            this.getLength() + 1, 
+            data
+        ))
+    }
+}
+
+const chain = new BlockChain()
+chain.addBlock('first')
+chain.addBlock('second')
+chain.addBlock('third')
+chain.addBlock('fourth')
+
+console.log(chain.getBlocks())
