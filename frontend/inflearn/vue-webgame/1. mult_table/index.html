@@ -10,23 +10,39 @@
 <body>
     <div id="root">
       <div>{{first}} * {{second}} = ?</div>
-      <form action="">
-        <input id="answer" type="number" v-model="value">
+      <form v-on:submit="onSubmit">
+        <input ref="answer" type="number" v-model="value">
         <button>입력</button>
       </form>
-      <div id="result">{{value}}</div>
+      <div>{{result}}</div>
     </div>
   <script>
     const app = new Vue({
         el: "#root",
         data: {
-          first: Math.ceil(Math.random() * 9),
-          second: Math.ceil(Math.random() * 9),
-          value: ''
+          first: 0,
+          second: 0,
+          value: '',
+          result: ''
         },
         methods: {
+          init() {
+            this.first = Math.ceil(Math.random() * 9),
+            this.second = Math.ceil(Math.random() * 9),
+            this.value = '',
+            this.result = ''
+
+            this.$refs.answer.focus()
+          },
+          // arrow function 시 this 관련해서 에러 발생
+          onSubmit(e) {
+            e.preventDefault();
+            this.result = (this.first * this.second === parseInt(this.value)) ? "정답" : "오답"
+            setTimeout(this.init, 1000)
+          }
         },
     })
+    app.init()
   </script>
 </body>
 </html>
