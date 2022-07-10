@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <title>Document</title>
+</head>
+<body>
+  <div id="root">
+    <div>{{word}}</div>
+    <form v-on:submit="onSubmit">
+      <input type="text" ref="input" v-model="input">
+      <button type="submit">제출</button>
+    </form>
+    <div>{{result}}</div>
+  </div>
+  <script>
+    const app = new Vue({
+      el:'#root',
+      data: {
+        input: '',
+        word: '끝말잇기',
+        result: ''
+      },
+      methods: {
+        init() { this.$refs.input.focus() },
+        onSubmit(e) {
+          e.preventDefault()
+          if (this.word[this.word.length - 1] === this.input[0]) {
+            this.word = this.input
+            this.result = ''
+          }
+          else this.result = '땡'
+          this.input = ''
+          this.init()
+        }
+      },
+    })
+    app.init()
+  </script>
+</body>
+</html>
