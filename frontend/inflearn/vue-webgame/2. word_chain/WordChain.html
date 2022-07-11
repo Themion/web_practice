@@ -11,20 +11,22 @@
 
 <body>
   <div id="root">
-    <WordChain />
-    <WordChain />
-    <WordChain />
+    <word-chain></word-chain>
+    <word-chain></word-chain>
+    <word-chain></word-chain>
   </div>
   <script>
-    Vue.component('WordChain', {
+    Vue.component('word-chain', {
       template: `
-<div>{{word}}</div>
+<div>
+  <div>{{word}}</div>
   <form v-on:submit="onSubmit">
     <input type="text" ref="input" v-model="input">
     <button type="submit">제출</button>
   </form>
-<div>{{result}}</div>
-      `,
+  <div>{{result}}</div>
+</div>
+`,
       data() {return {
         input: '',
         word: '끝말잇기',
