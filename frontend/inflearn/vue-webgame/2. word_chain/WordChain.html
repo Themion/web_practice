@@ -11,12 +11,12 @@
 
 <body>
   <div id="root">
-    <word-chain></word-chain>
-    <word-chain></word-chain>
-    <word-chain></word-chain>
+    <word-chain :start-word="'끝말잇기'"></word-chain>
+    <word-chain :start-word="'단어'"></word-chain>
+    <word-chain :start-word="'놀이'"></word-chain>
   </div>
   <script>
-    Vue.component('word-chain', {
+    Vue.component('wordChain', {
       template: `
 <div>
   <div>{{word}}</div>
@@ -27,9 +27,10 @@
   <div>{{result}}</div>
 </div>
 `,
+      props: ['startWord'],
       data() {return {
         input: '',
-        word: '끝말잇기',
+        word: this['startWord'],
         result: ''
       }},
       methods: {
