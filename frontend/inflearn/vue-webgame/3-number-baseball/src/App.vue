@@ -20,7 +20,6 @@
         methods: {
             onSubmit(e) {
                 e.preventDefault();
-                
             }
         }
     }
