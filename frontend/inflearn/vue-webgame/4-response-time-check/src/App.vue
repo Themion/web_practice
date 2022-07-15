@@ -14,14 +14,16 @@ export default {
       message: '클릭해서 시작하세요.',
     }
   },
+  // 성능 향상을 위해 무거운 함수는 computed에 넣어 캐싱
+  computed: {
+    average() {
+      return this.result.reduce((prev, curr) => prev + curr, 0) / this.result.length
+    }
+  },
   methods: {
     reset() {
       this.onNow()
       this.result = []
-    },
-    getMean(arr) {
-      if (arr.length === 0) return 0
-      return arr.reduce((prev, curr) => prev + curr, 0) / arr.length
     },
     onWaiting() {
       this.message = '초록색이 되면 클릭하세요.'
@@ -59,12 +61,16 @@ export default {
 </script>
 
 <template>
-  <div id="screen" :class="state" @click="onClick">{{ message }}</div>
   <!-- <div id="screen" v-bind:class="state">{{message}}</div> -->
-  <div>
-    <div>평균 시간: {{this.getMean(this.result)}}ms</div>
+  <div id="screen" :class="state" @click="onClick">{{ message }}</div>
+  <template v-if="result.length">
+    <div>평균 시간: {{average}}ms</div>
     <button @click="reset">리셋</button>
-  </div>
+  </template>
+  <!-- <div v-show="result.length">
+    <div>평균 시간: {{average}}ms</div>
+    <button @click="reset">리셋</button>
+  </div> -->
 </template>
 
 <style scoped>
