@@ -1,8 +1,17 @@
 <script>
+const ROCK = '바위'
+const SCISSOR = '가위'
+const PAPER = '보'
+
 const imgPos = {
-  바위: '0',
-  가위: '-142px',
-  보: '-284px'
+  [ROCK]: '0',
+  [SCISSOR]: '-142px',
+  [PAPER]: '-284px'
+}
+const defeatedBy = {
+  [ROCK]: SCISSOR,
+  [SCISSOR]: PAPER,
+  [PAPER]: ROCK
 }
 
 let interval = null
@@ -11,7 +20,7 @@ export default {
   data() {
     return {
       myState: '',
-      cpuState: '바위',
+      cpuState: ROCK,
       result: '',
       score: 0,
     }
@@ -27,22 +36,37 @@ export default {
     setMyState(val) { 
       this.myState = val
       clearInterval(interval)
+
+      switch (this.myState) {
+        case this.cpuState: 
+          this.result = '비겼습니다'
+          break
+        case defeatedBy[this.cpuState]: 
+          this.result = '졌습니다'
+          this.score -= 1
+          break
+        default: 
+          this.result = '이겼습니다'
+          this.score += 1
+      }
+
+      setTimeout(() => interval = this.Interval(), 1000);
+    },
+    Interval() { 
+      return setInterval(() => {
+        this.cpuState = defeatedBy[this.cpuState]
+        this.result = ''
+      }, 100) 
     }
   },
-  // created() {
-  //   console.log('created')
-  // },
+  created() {
+    this.ROCK = ROCK
+    this.SCISSOR = SCISSOR
+    this.PAPER = PAPER
+  },
   mounted() {
     console.log('mounted')
-    interval = setInterval(() => {
-      this.cpuState = ((state) => {
-        switch (state) {
-          case '바위': return '가위'
-          case '가위': return '보'
-          case '보': default: return '바위'
-        }
-      })(this.cpuState)
-    }, 10);
+    interval = this.Interval()
   },
   beforeDestroy() { clearInterval(interval) },
 }
@@ -51,9 +75,9 @@ export default {
 <template>
   <div id="computer" :style="ImgUrl"></div>
   <div>
-    <button @click="setMyState('가위')">가위</button>
-    <button @click="setMyState('바위')">바위</button>
-    <button @click="setMyState('보')">보</button>
+    <button @click="() => setMyState(SCISSOR)">가위</button>
+    <button @click="() => setMyState(ROCK)">바위</button>
+    <button @click="() => setMyState(PAPER)">보</button>
   </div>
   <div>{{result}}</div>
   <div>현재 점수: {{score}}</div>
