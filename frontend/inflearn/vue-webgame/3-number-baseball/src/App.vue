@@ -10,7 +10,7 @@
     </form>
     <div>남은 시도: {{10 - tries.length}}</div>
     <ul>
-        <li v-for="t in tries">
+        <li v-for="t in tries" :key="t.try">
             <div>{{t.try}}</div>
             <div>strike: {{t.result.strike}}, ball: {{t.result.ball}}</div>
         </li>
