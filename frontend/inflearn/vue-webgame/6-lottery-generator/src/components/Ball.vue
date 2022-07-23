@@ -5,16 +5,27 @@ export default {
     value: Number,
   },
   data() {
-    let background
-    return {
-      background,
-    }
   },
+  computed: {
+    backGround() {
+      let background = (() => {
+        switch (parseInt(this.value / 10)) {
+          case 0: return 'red'
+          case 1: return 'orange'
+          case 2: return 'yellow'
+          case 3: return 'green'
+          case 4: return 'blue'
+          default: return 'grey'
+        }
+      })()
+      return { background }
+    }
+  }
 }
 </script>
 
 <template>
-  <div class="ball">{{value}}</div>
+  <div class="ball" :style="backGround">{{value}}</div>
 </template>
 
 <style scoped>
@@ -28,5 +39,6 @@ export default {
   font-size: 20px;
   text-align: center;
   margin-right: 20px;
+  margin-bottom: 10px;
 }
 </style>
