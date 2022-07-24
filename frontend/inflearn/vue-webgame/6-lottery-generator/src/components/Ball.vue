@@ -4,8 +4,6 @@ export default {
   props: {
     value: Number,
   },
-  data() {
-  },
   computed: {
     backGround() {
       let background = (() => {

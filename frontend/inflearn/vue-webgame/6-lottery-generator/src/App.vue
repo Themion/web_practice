@@ -1,62 +1,66 @@
 <!-- https://kr.vuejs.org/v2/style-guide/index.html -->
 
-<script setup>
-import Ball from './components/Ball.vue'
-</script>
 <script>
-function getNumbers() {
-  const candidates = Array(45).fill().map((_, i) => i + 1)
-  const shuffle = []
+  import Ball from './components/Ball.vue'
 
-  while (candidates.length) {
-    const pick = Math.floor(Math.random() * candidates.length)
-    shuffle.push(candidates.splice(pick, 1)[0])
+  function getNumbers() {
+    const candidates = Array(45).fill().map((_, i) => i + 1)
+    const shuffle = []
+
+    while (candidates.length) {
+      const pick = Math.floor(Math.random() * candidates.length)
+      shuffle.push(candidates.splice(pick, 1)[0])
+    }
+
+    const bonus = shuffle[shuffle.length - 1]
+    const wins = shuffle.slice(0, 6).sort((p, c) => p - c)
+
+    return { wins, bonus }
   }
 
-  const bonus = shuffle[shuffle.length - 1]
-  const wins = shuffle.slice(0, 6).sort((p, c) => p - c)
-  
-  return { wins, bonus }
-}
+  export default {
+    components: {
+      Ball
+    },
+    data() {
+      return {
+        wins: [],
+        bonus: null,
+        timeouts: []
+      }
+    },
+    methods: {
+      setBalls() {
+        const { wins, bonus } = getNumbers()
 
-export default {
-  data() {
-    return {
-      wins: [],
-      bonus: null,
-    }
-  },
-  computed: {
+        wins.forEach((val, key) => {
+          this.timeouts.push(
+            setTimeout(() => this.wins.push(val), (key + 1) * 1000)
+          )
+        })
 
-  },
-  methods: {
-    setBalls() {
-      const { bonus, wins } = this.getNumbers()
-      
-      this.wins = []
-      this.bonus = null
-      this.timeouts = []
-
-      wins.forEach((val, key) => {
         this.timeouts.push(
-          setTimeout(() => this.wins.push(val), (key + 1) * 1000)
+          setTimeout(() => this.bonus = bonus, (wins.length + 1) * 1000)
         )
-      })
-      this.timeouts.push(
-        setTimeout(() => this.bonus = bonus, (wins.length + 1) * 1000)
-      )
+      },
+      reset() {
+        this.wins = []
+        this.bonus = null
+        this.timeouts = []
+      }
+    },
+    mounted() {
+      this.setBalls()
+    },
+    beforeDestroy() {
+      this.timeouts.forEach(timeout => clearTimeout(timeout))
+    },
+    watch: {
+      wins(value, oldValue) {
+        if (value.length === 0) this.setBalls()
+      }
     }
-  },
-  mounted() {
-    this.setBalls()
-  },
-  beforeDestroy() {
-    this.timeouts.forEach(timeout => clearTimeout(timeout))
-  },
-  watch: {
-
   }
-}
 </script>
 
 <template>
@@ -67,7 +71,7 @@ export default {
   <div>보너스</div>
   <Ball v-if="bonus" :value="bonus" />
   <br />
-  <button v-if="bonus" @click="setBalls">다시 하기</button>
+  <button v-if="bonus" @click="reset">다시 하기</button>
 </template>
 
 <style scoped>
