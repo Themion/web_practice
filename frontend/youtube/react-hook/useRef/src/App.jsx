@@ -1,19 +1,22 @@
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useRef } from "react"
 
 function App() {
-    const [count, setCount] = useState(1)
-    const renderCount = useRef(0)
+    const ref = useRef()
 
-    const increaseState = () => setCount(count + 1)
-    
+    const onClick = (e) => {
+        alert(`Welcome, ${ref.current.value}`)
+        ref.current.focus()
+    }
+
+    // useRef를 이용해 HTMLElement에 접근
     useEffect(() => {
-        console.log('렌더링 횟수: ' + renderCount.current++)
+        ref.current.focus()
     })
 
     return (
         <div className="App">
-            <p>State: {count}</p>
-            <button onClick={increaseState}>State +</button>
+            <input ref={ref} type="text" placeholder="username"/>
+            <button onClick={onClick}>login</button>
         </div>
     )
 }
