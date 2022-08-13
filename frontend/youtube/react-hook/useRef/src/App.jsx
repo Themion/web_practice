@@ -1,30 +1,19 @@
-import { useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 
 function App() {
-    let count = 0
-    const countRef = useRef(0)
-    const [renderer, render] = useState(0)
-    
-    const increaseLet = () => {
-        count += 1
-        console.log('let: ' + count)
-    }
-    // 자주 바뀌되 re-render될 필요 없는 값을 저장
-    // 일반 변수와 다르게 re-render 되더라도 값이 사라지지 않음
-    const increaseRef = () => {
-        countRef.current += 1
-        console.log('ref: ' + countRef.current)
-    }
+    const [count, setCount] = useState(1)
+    const renderCount = useRef(0)
 
-    const doRender = () => render(renderer + 1)
+    const increaseState = () => setCount(count + 1)
     
+    useEffect(() => {
+        console.log('렌더링 횟수: ' + renderCount.current++)
+    })
+
     return (
         <div className="App">
-            <p>let: {count}</p>
-            <p>Ref: {countRef.current}</p>
-            <button onClick={increaseLet}>let +</button>
-            <button onClick={increaseRef}>Ref +</button>
-            <button onClick={doRender}>render</button>
+            <p>State: {count}</p>
+            <button onClick={increaseState}>State +</button>
         </div>
     )
 }
