@@ -1,8 +1,10 @@
 import { useContext } from "react"
 import { ThemeContext } from "../context/ThemeContext"
+import { UserContext } from "../context/UserContext"
 
 const Content = () => {
-    const {name, isDark} = useContext(ThemeContext)
+    const { isDark } = useContext(ThemeContext)
+    const name = useContext(UserContext)
 
     return (
         <div 
