@@ -1,4 +1,9 @@
-const Header = ({isDark, name}) => {
+import { useContext } from "react"
+import { ThemeContext } from "../context/ThemeContext"
+
+const Header = () => {
+    const {name, isDark} = useContext(ThemeContext)
+
     return (
         <header 
             className="header"

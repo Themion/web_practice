@@ -1,4 +1,9 @@
-const Content = ({isDark, name}) => {
+import { useContext } from "react"
+import { ThemeContext } from "../context/ThemeContext"
+
+const Content = () => {
+    const {name, isDark} = useContext(ThemeContext)
+
     return (
         <div 
             className="content"
