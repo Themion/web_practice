@@ -4,9 +4,11 @@ function App() {
     const [number, setNumber] = useState(0)
     const [isKorea, setIsKorea] = useState(true)
 
-    const location = {
-        country: isKorea ? '한국' : '외국'
-    }
+    // useMemo를 이용해 불필요한 참조값 변경을 방지
+    const location = useMemo(
+        () => ({ country: isKorea ? '한국' : '외국' }),
+        [isKorea]
+    )
 
     // 의존성 배열은 객체를 값이 아닌 참조형으로 계산
     useEffect(() => {
