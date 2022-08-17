@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 
 const hardCalculate = (number) => {
     for (let i = 0; i < 999999999; i++) {}
@@ -11,8 +11,14 @@ function App() {
     const [hardNumber, setHardNumber] = useState(1)
     const [easyNumber, setEasyNumber] = useState(1)
 
-    const hardSum = hardCalculate(hardNumber)
-    const easySum = easyCalculate(easyNumber)
+    const hardSum = useMemo(
+        () => hardCalculate(hardNumber),
+        [hardNumber]
+    )
+    const easySum = useMemo(
+        () => easyCalculate(easyNumber),
+        [easyNumber]
+    )
 
     const onHardChange = (e) => setHardNumber(parseInt(e.target.value))
     const onEasyChange = (e) => setEasyNumber(parseInt(e.target.value))
