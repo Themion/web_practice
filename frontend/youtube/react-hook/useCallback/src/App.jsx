@@ -1,31 +1,28 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useState } from 'react'
+import Box from './components/Box'
 
 function App() {
-    const [number, setNumber] = useState(0)
-    const [toggle, setToggle] = useState(true)
+    const [size, setSize] = useState(100)
+    const [isDark, setIsDark] = useState(false)
 
-    // 재렌더링 할 때마다 useEffect 호출시키지 않음
-    // number가 바뀔 때만 log 함수 갱신
-    const log = useCallback(
-        () => console.log('number: ' + number),
-        [number]
-    )
-
-    useEffect(() => {
-        console.log('function log has changed')
-    }, [log])
+    const createBoxStyle = () => ({
+        backgroundColor: 'pink',
+        width: `${size}px`,
+        height: `${size}px`
+    })
 
     return (
-        <div className="App">
+        <div className="App" style={{
+            background: isDark ? 'black' : 'white'
+        }}>
             <input 
                 type="number" 
-                value={number}
-                onChange={(e) => setNumber(e.target.value)}/>
-            <button onClick={() => setToggle(!toggle)}>
-                {toggle.toString()}
+                value={size}
+                onChange={e => setSize(e.target.value)} />
+            <button onClick={() => setIsDark(!isDark)}>
+                Changing Theme
             </button>
-            <br />
-            <button onClick={log}>log</button>
+            <Box createStyle={createBoxStyle} />
         </div>
     )
 }
