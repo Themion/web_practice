@@ -1,19 +1,38 @@
-import { useState } from "react"
+import { useReducer, useState } from "react"
+
+const ACTION_TYPES = { deposit: 'deposit', withdraw: 'withdraw' }
+
+const reducer = (state, action) => {
+    console.log('reducer:', state, action)
+    switch (action.type) {
+        case ACTION_TYPES.deposit: return state + action.payload
+        case ACTION_TYPES.withdraw: return state - action.payload
+        default: return state
+    }
+}
 
 function App() {
     const [number, setNumber] = useState(0)
+    const [money, dispatch] = useReducer(reducer, 0)
 
     return (
         <div className="App">
             <h2>은행 예제</h2>
-            <p>잔고: ?원</p>
-            <input 
+            <p>잔고: {money}원</p>
+            <input
                 type="number"
                 value={number}
-                onChange={e => setNumber(e.target.value)}
-                step={1000} />
-            <button>예금</button>
-            <button>출금</button>
+                onChange={e => setNumber(parseInt(e.target.value))}
+                step={1000}
+                min={0} />
+            <button onClick={() => dispatch({
+                type: ACTION_TYPES.deposit,
+                payload: number
+            })}>예금</button>
+            <button onClick={() => dispatch({
+                type: ACTION_TYPES.withdraw,
+                payload: number
+            })}>출금</button>
         </div>
     )
 }
