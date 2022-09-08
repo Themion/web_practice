@@ -1,3 +1,4 @@
-import { test } from "./src/module"
+import { sayHello } from "./src/module"
 
-console.log(test())
+console.log(sayHello('john'))
+console.log(sayHello('lee'))

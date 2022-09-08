@@ -1,3 +1,3 @@
-const test = () => 'test'
+const sayHello = (name) => `hello ${name}`
 
-export { test }
+export { sayHello }

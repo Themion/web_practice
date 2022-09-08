@@ -1,1 +1,1 @@
-(()=>{"use strict";console.log("test")})();
+(()=>{"use strict";var o=function(o){return"hello ".concat(o)};console.log(o("john")),console.log(o("lee"))})();
