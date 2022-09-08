@@ -3,4 +3,4 @@ import worldWord from './world.js';
 
 import './style.css'
 
-document.getElementById('root').innerHTML = helloWord + worldWord;
+document.getElementById('root').innerHTML = worldWord + helloWord;
