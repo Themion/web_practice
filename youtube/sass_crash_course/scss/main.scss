@@ -14,7 +14,7 @@ body {
         width: 80%;
         margin: 0 auto;
 
-        &-paragraph {
+        #{&}-paragraph {
             font-weight: map-get($font-weight, bold);
         }
     }
