@@ -1,5 +1,11 @@
 body {
   background: gray;
   color: #fff;
+}
+body .main {
+  width: 80%;
+  margin: 0 auto;
+}
+body .main p.main-paragraph {
   font-weight: 700;
 }/*# sourceMappingURL=main.css.map */

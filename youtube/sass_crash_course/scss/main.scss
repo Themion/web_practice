@@ -9,5 +9,13 @@ $font-weight: (
 body {
     background: $background;
     color: $text-color;
-    font-weight: map-get($font-weight, bold);
+
+    .main {
+        width: 80%;
+        margin: 0 auto;
+
+        p.main-paragraph {
+            font-weight: map-get($font-weight, bold);
+        }
+    }
 }
