@@ -7,9 +7,19 @@
   <link rel="stylesheet" href="./css/main.css">
   <title>Sass Tutorial</title>
 </head>
-<body>
+<body class="dark">
   <div class="main">
     <p class="main-paragraph">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt molestias magnam a sequi, voluptatum nam quis repudiandae, omnis quos in, quam molestiae blanditiis laudantium ad harum commodi nemo odit! Est eos tempore saepe repellat in earum ea rem deserunt optio reiciendis ut mollitia molestiae beatae harum, recusandae alias atque libero.</p>
+    <p class="main-paragraph">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt molestias magnam a sequi, voluptatum nam quis repudiandae, omnis quos in, quam molestiae blanditiis laudantium ad harum commodi nemo odit! Est eos tempore saepe repellat in earum ea rem deserunt optio reiciendis ut mollitia molestiae beatae harum, recusandae alias atque libero.</p>
   </div>
+  <script>
+    const light = 'light'
+    const dark = 'dark'
+
+    document.addEventListener('click', () => {
+      document.body.classList.toggle(light)
+      document.body.classList.toggle(dark)
+    })
+  </script>
 </body>
 </html>
