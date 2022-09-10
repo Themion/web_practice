@@ -1,3 +1,6 @@
+create user 'nodejs'@'%' identified by 'nodenode';
+grant all privileges on opentutorials.* to 'nodejs'@'%';
+
 drop database opentutorials;
 create database opentutorials;
 
