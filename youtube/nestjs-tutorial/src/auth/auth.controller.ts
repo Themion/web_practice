@@ -11,8 +11,11 @@ export class AuthController {
         return this.authService.login();
     }
     @Post('signup')
-    signup(@Body() dto: AuthDTO) {
-        console.log(dto);
+    signup(
+        @Body('username') username: AuthDTO['username'],
+        @Body('password') password: AuthDTO['password'],
+    ) {
+        console.log({ username, password });
         return this.authService.signup();
     }
 }
