@@ -14,13 +14,14 @@ export class AuthService {
         private config: ConfigService
     ) { }
 
+    private static readonly JWT_SECRET = 'JWT_SECRET';
+
     signToken(userId: number, email: string) {
         const payload = { sub: userId, email };
-        const JWT_SECRET = 'JWT_SECRET';
 
         return this.jwt.signAsync(payload, {
             expiresIn: '15m',
-            secret: this.config.get(JWT_SECRET)
+            secret: this.config.get(AuthService.JWT_SECRET)
         });
     }
 
