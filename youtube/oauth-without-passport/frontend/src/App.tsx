@@ -1,5 +1,5 @@
 function App() {
-  const { REACT_APP_CLIENT_ID, REACT_APP_CLIENT_SECRET, REACT_APP_REDIRECT_URL } = process.env;
+  const { REACT_APP_CLIENT_ID, REACT_APP_REDIRECT_URL } = process.env;
   const path = "/";
 
   return (
