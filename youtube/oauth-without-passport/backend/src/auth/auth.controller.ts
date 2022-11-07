@@ -10,7 +10,7 @@ export class AuthController {
     constructor(
         private readonly configService: ConfigService,
         private readonly httpService: HttpService,
-    ) { }
+    ) {}
 
     private async getGithubUser(code: string) {
         const CLIENT_ID = this.configService.get('CLIENT_ID'),
@@ -27,14 +27,20 @@ export class AuthController {
 
         const { access_token } = decode(token);
 
-        return await this.httpService.axiosRef
+        const data = await this.httpService.axiosRef
             .get('https://api.github.com/user', {
                 headers: { Authorization: `Bearer ${access_token}` },
             })
-            .then((res) => res.data)
+            .then((res) => {
+                console.log(res.data.id);
+                console.log(typeof res.data.id);
+                return res.data;
+            })
             .catch((error) => {
                 throw error;
             });
+
+        return data;
     }
 
     @Get('github')
