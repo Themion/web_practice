@@ -1,8 +1,10 @@
-name = "John"
-age = 15
-height = 175.8
-hex = 0x123
-isMale = true
-email = nil
+str = "      this is a random string      "
+puts str.upcase().downcase().strip().length()
+puts str.length()
+puts str.include? "random"
+puts str.include? "certain"
 
-puts 'My name is ' + name + " and my age is " + age
+str = str.strip()
+
+puts str[0, 7]
+puts str.index('s')
