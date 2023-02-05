@@ -1,1 +1,3 @@
-print "Hello, World!\n"
+puts "puts"
+print "Hello"
+print ", World!\n"
