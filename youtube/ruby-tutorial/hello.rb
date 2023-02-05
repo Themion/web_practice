@@ -1,10 +1,13 @@
-str = "      this is a random string      "
-puts str.upcase().downcase().strip().length()
-puts str.length()
-puts str.include? "random"
-puts str.include? "certain"
+puts 3 + 5
+puts 3 * 5
+puts 3 / 5
+puts 3.0 / 5.0
 
-str = str.strip()
+puts ("3 + 5 = " + (3 + 5).to_s)
+puts 40.5.round()
+puts 40.3.round()
+puts 40.5.floor()
+puts 40.3.ceil()
 
-puts str[0, 7]
-puts str.index('s')
+puts Math.sqrt(16)
+puts Math.log(2.71)
