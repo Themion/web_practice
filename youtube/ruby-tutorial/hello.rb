@@ -1,10 +1,9 @@
-input = gets.chomp()
-nums = input.split(' ')
+arr = ["aaa", "bbb", "ccc"]
+arr[2][1] = 'd'
 
-val = 0
+arr[4] = "eee"
 
-nums.each do |num|
-    val += num.to_f
-end
+puts arr.join(' ')
+puts arr.length
 
-puts val
+puts ["a", "b", "c"].join(' ')
