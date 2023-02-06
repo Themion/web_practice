@@ -1,9 +1,14 @@
-arr = ["aaa", "bbb", "ccc"]
-arr[2][1] = 'd'
+hash = { a: 1, b: 2 }
+hash[:c] = 3
 
-arr[4] = "eee"
+nums.each do |num|
+    val += num.to_f
+end
+text = "text"
 
-puts arr.join(' ')
-puts arr.length
+puts val
+hash[text] = 4
 
-puts ["a", "b", "c"].join(' ')
+puts hash
+puts hash[:text] == hash["text"]
+puts hash['c'] == nil
