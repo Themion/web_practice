@@ -1,3 +1,10 @@
-print "Enter your name: "
-name = gets.chomp()
-puts "Hello, " + name + "! Nice to meet you!"
+input = gets.chomp()
+nums = input.split(' ')
+
+val = 0
+
+nums.each do |num|
+    val += num.to_f
+end
+
+puts val
