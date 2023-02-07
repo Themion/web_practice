@@ -1,17 +1,23 @@
-def sayHi(name = "EnterNameHere")
-    puts "Hello, " + name.to_s + "!"
-    return 1, 2
+print("Enter first number: ")
+num1 = gets.chomp().to_f()
+
+print("Enter opertor(+, -, *, /): ")
+operator = gets.chomp()
+
+print("Enter second number: ")
+num2 = gets.chomp().to_f()
+
+val = 0
+
+case operator
+when '+'
+     val = num1 + num2
+when '-'
+    val = num1 - num2
+when '*'
+    val = num1 * num2
+when '/'
+    val = num1 / num2
 end
 
-a = sayHi()[1]
-a += sayHi("Nill")[0]
-
-if (a == 5)
-    puts "a is 5"
-elsif (a < 5)
-    puts "a is smaller than 5"
-else 
-    puts "a is bigger than 5"
-end 
-
-puts a ** 3
+puts("Result: " + val.to_s)
