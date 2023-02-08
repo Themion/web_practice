@@ -1,14 +1,20 @@
-val = 0
-sum = 0
-
-while val < 10
-    val += 1
-    sum += val
+File.open('./file.txt', "r") do |file|
+    puts file.readchar()
+    puts file.readchar()
+    puts file.readchar()
+    puts file.read()
 end
-puts sum
 
-sum = 0
-10.times do |i|
-    sum += i
+puts
+
+File.open('./file.txt', "r") do |file|
+    for line in file.readlines()
+        puts line
+    end
 end
-puts sum
+
+puts
+
+file = File.open('./file.txt', 'r')
+puts file.read
+# file.close()
