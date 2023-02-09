@@ -1,23 +1,24 @@
-class Book
-    attr_accessor :title, :author, :pages
-
-    def initialize(title, author, pages = 400)
-        @title = title
-        @author = author
-        @pages = pages
+class A
+    def foo()
+        return "foo"
     end
-
-    def to_object() 
-        return {
-            :title => @title,
-            :author => @author,
-            :pages => @pages
-        }
+    def bar()
+        return "bar"
     end
 end
 
-lotr = Book.new("Lord of the Rings", "J. R. R. Tolkien", 1000)
-hp =  Book.new("Harry Potter", "J. K. Rowling")
+class B < A
+    def foo()
+        return super() + '!'
+    end
+    def baz()
+        return "baz"
+    end
+end
 
-puts lotr.to_object()
-puts hp.to_object()
+a = A.new()
+b = B.new()
+
+puts a.foo()
+puts b.foo()
+puts b.baz()
