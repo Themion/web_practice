@@ -1,26 +1,23 @@
-begin
-    nums = [1, 2, 3, 4, 5]
-    key = "num"
-    puts nums[key]
-rescue TypeError => e
-    print "Type error:\t\t "
-    puts e
-rescue ZeroDivisionError => e
-    print "Division by zero error:\t "
-    puts e
-rescue
-    puts "unknown error"
+class Book
+    attr_accessor :title, :author, :pages
+
+    def initialize(title, author, pages = 400)
+        @title = title
+        @author = author
+        @pages = pages
+    end
+
+    def to_object() 
+        return {
+            :title => @title,
+            :author => @author,
+            :pages => @pages
+        }
+    end
 end
 
+lotr = Book.new("Lord of the Rings", "J. R. R. Tolkien", 1000)
+hp =  Book.new("Harry Potter", "J. K. Rowling")
 
-begin
-    num = 10 / 0
-rescue TypeError => e
-    print "Type error:\t\t "
-    puts e
-rescue ZeroDivisionError => e
-    print "Division by zero error:\t "
-    puts e
-rescue
-    puts "unknown error"
-end
+puts lotr.to_object()
+puts hp.to_object()
