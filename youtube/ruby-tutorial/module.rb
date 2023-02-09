@@ -7,5 +7,11 @@ module FooBar
     end
 end
 
+class Clazz
+    def foobar()
+        return "foobar"
+    end
+end
+
 # include FooBar
 # puts FooBar.foo()
