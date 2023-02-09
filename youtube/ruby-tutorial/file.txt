@@ -1,3 +1,0 @@
-File has overwritten!
-Hello Ruby!
-File has re-overwritten!
