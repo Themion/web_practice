@@ -3,8 +3,8 @@ package hello.core.member;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MemoryMemberRepository implements MemberRespository{
-  private static Map<Long, Member> map = new HashMap<>();
+public class MemoryMemberRepository implements MemberRepository{
+  private static final Map<Long, Member> map = new HashMap<>();
 
   @Override
   public void save(Member member) {
