@@ -5,7 +5,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import hello.core.AppConfig;
-import hello.core.discount.DiscountPolicy;
 import hello.core.member.Grade;
 import hello.core.member.Member;
 import hello.core.member.MemberService;
@@ -20,8 +19,7 @@ public class RateOrderServiceTest {
     appConfig = new AppConfig();
 
     memberService = appConfig.memberService();
-    DiscountPolicy rateDiscountPolicy = appConfig.rateDiscountPolicy();
-    orderService = appConfig.orderService(rateDiscountPolicy);
+    orderService = appConfig.rateOrderService();
   }
 
   @Test
