@@ -1,6 +1,7 @@
 package hello.core.member;
 
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import hello.core.AppConfig;
@@ -15,5 +16,7 @@ public class MemberApp {
     memberService.join(m);
 
     System.out.println(memberService.findMember(m.getId()).getName());
+
+    ((ConfigurableApplicationContext) applicationContext).close();
   }
 }

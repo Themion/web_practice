@@ -1,6 +1,7 @@
 package hello.core.order;
 
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import hello.core.AppConfig;
@@ -24,5 +25,6 @@ public class OrderApp {
     final Order vipOrder = orderService.createOrder(vipMember.getId(), itemName, itemPrice);
 
     System.out.println(vipOrder);
+    ((ConfigurableApplicationContext) applicationContext).close();
   }
 }
