@@ -19,4 +19,13 @@ public class SingletonTest {
 
     assertThat(ms1).isNotSameAs(ms2);
   }
+
+  @Test
+  @DisplayName("싱글톤 패턴을 적용한 객체 사용")
+  void singletonServiceTest() {
+    SingletonService s1 = SingletonService.getInstance();
+    SingletonService s2 = SingletonService.getInstance();
+
+    assertThat(s1).isSameAs(s2);
+  }
 }
