@@ -1,37 +1,12 @@
 package hello.core.member;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+
+@Data
+@AllArgsConstructor
 public class Member {
   private Long id;
   private String name;
   private Grade grade;
-
-  public Member(Long id, String name, Grade grade) {
-    this.id = id;
-    this.name = name;
-    this.grade = grade;
-  }
-
-  public Long getId() {
-    return this.id;
-  }
-
-  public String getName() {
-    return this.name;
-  }
-  
-  public Grade getGrade() {
-    return this.grade;
-  }
-
-  public void setId(Long id) {
-    this.id = id;
-  }
-
-  public void setName(String name) {
-    this.name = name;
-  }
-
-  public void setGrade(Grade grade) {
-    this.grade = grade;
-  }
 }
