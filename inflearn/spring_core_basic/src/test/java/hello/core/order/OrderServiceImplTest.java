@@ -22,7 +22,7 @@ public class OrderServiceImplTest {
     Member member = new Member(1L, "member", Grade.VIP);
     memberRepository.save(member);
 
-    DiscountPolicy discountPolicy = ac.getBean(DiscountPolicy.class);
+    DiscountPolicy discountPolicy = ac.getBean("rateDiscountPolicy", DiscountPolicy.class);
     OrderService orderService = new OrderServiceImpl(memberRepository, discountPolicy);
 
     Order order = orderService.createOrder(member.getId(), "item", 10000);
