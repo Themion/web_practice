@@ -4,9 +4,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
+import javax.inject.Provider;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Scope;
 
@@ -33,12 +33,13 @@ public class SingletonWithPrototypeTest1 {
   @Test
   void singletonClientUsePrototype() {
     AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(
-        PrototypeBean.class, ClientBean1.class, ClientBean2.class);
+        PrototypeBean.class, ClientBean.class);
 
-    ClientBean clientBean1 = ac.getBean(ClientBean1.class);
-    ClientBean clientBean2 = ac.getBean(ClientBean2.class);
+    ClientBean clientBean1 = ac.getBean(ClientBean.class);
+    ClientBean clientBean2 = ac.getBean(ClientBean.class);
 
     assertThat(clientBean1.getPrototypeBean()).isNotEqualTo(clientBean2.getPrototypeBean());
+    assertThat(clientBean1.getPrototypeBean()).isNotEqualTo(clientBean1.getPrototypeBean());
 
     assertThat(clientBean1.logic()).isEqualTo(1);
     assertThat(clientBean2.logic()).isEqualTo(1);
@@ -69,33 +70,20 @@ public class SingletonWithPrototypeTest1 {
     }
   }
 
+  @Scope("singleton")
   @AllArgsConstructor
   static class ClientBean {
-    private final PrototypeBean prototypeBean;
+    // private ObjectProvider<PrototypeBean> prototypeBeanProvider;
+    private Provider<PrototypeBean> prototypeBeanProvider;
 
     public PrototypeBean getPrototypeBean() {
-      return prototypeBean;
+      return this.prototypeBeanProvider.get();
     }
 
     public int logic() {
-      this.prototypeBean.increment();
-      return this.prototypeBean.getCount();
+      PrototypeBean prototypeBean = this.getPrototypeBean();
+      prototypeBean.increment();
+      return prototypeBean.getCount();
     }
-  }
-
-  @Scope("singleton")
-  static class ClientBean1 extends ClientBean {
-    @Autowired
-    public ClientBean1(PrototypeBean prototypeBean) {
-      super(prototypeBean);
-    };
-  }
-
-  @Scope("singleton")
-  static class ClientBean2 extends ClientBean {
-    @Autowired
-    public ClientBean2(PrototypeBean prototypeBean) {
-      super(prototypeBean);
-    };
   }
 }
