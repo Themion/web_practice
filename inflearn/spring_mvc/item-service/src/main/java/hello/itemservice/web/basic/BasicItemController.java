@@ -7,6 +7,7 @@ import javax.annotation.PostConstruct;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import hello.itemservice.domain.item.Item;
 import hello.itemservice.domain.item.ItemRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Controller
 @RequestMapping("/basic/items")
 @RequiredArgsConstructor
@@ -50,8 +53,11 @@ public class BasicItemController {
     return "basic/addForm";
   }
 
+  // param명을 이용해 자동으로 model.addAttribute 실행
   @PostMapping("/add")
-  public String save() {
-    return "basic/addForm";
+  public String save(@ModelAttribute Item item) {
+    log.info("item: {}", item);
+    itemRepository.save(item);
+    return "basic/item";
   }
 }
