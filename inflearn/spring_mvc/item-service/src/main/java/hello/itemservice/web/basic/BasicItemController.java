@@ -53,12 +53,11 @@ public class BasicItemController {
     return "basic/addForm";
   }
 
-  // param명을 이용해 자동으로 model.addAttribute 실행
   @PostMapping("/add")
   public String save(@ModelAttribute Item item) {
     log.info("item: {}", item);
     itemRepository.save(item);
-    return "basic/item";
+    return "redirect:/basic/items/" + item.getId();
   }
 
   @GetMapping("/{itemId}/edit")
