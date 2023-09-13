@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/basic")
@@ -66,6 +67,13 @@ public class BasicController {
   public String literal(Model model) {
     model.addAttribute("data", "Spring Framework!");
     return "basic/literal";
+  }
+
+  @GetMapping(value = "/operation")
+  public String getMethodName(Model model) {
+    model.addAttribute("nullData", null);
+    model.addAttribute("data", "Spring!");
+    return "basic/operation";
   }
 
 }
