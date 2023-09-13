@@ -61,4 +61,11 @@ public class BasicController {
     model.addAttribute("param2", "data2");
     return "basic/link";
   }
+
+  @GetMapping(value = "/literal")
+  public String literal(Model model) {
+    model.addAttribute("data", "Spring Framework!");
+    return "basic/literal";
+  }
+
 }
