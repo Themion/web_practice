@@ -106,4 +106,17 @@ public class BasicController {
     return "basic/comments";
   }
 
+  @GetMapping(value = "/block")
+  public String block(Model model) {
+    this.addUsers(model);
+    return "basic/block";
+  }
+
+  @GetMapping(value = "/javascript")
+  public String javascript(Model model) {
+    this.addUsers(model);
+    model.addAttribute("user", new User("userA", 10));
+    return "basic/javascript";
+  }
+
 }
