@@ -100,4 +100,10 @@ public class BasicController {
     return "basic/condition";
   }
 
+  @GetMapping(value = "/comments")
+  public String comments(Model model) {
+    model.addAttribute("data", "html data");
+    return "basic/comments";
+  }
+
 }
