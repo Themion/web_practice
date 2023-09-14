@@ -94,4 +94,10 @@ public class BasicController {
     return "basic/each";
   }
 
+  @GetMapping(value = "/condition")
+  public String condition(Model model) {
+    this.addUsers(model);
+    return "basic/condition";
+  }
+
 }
