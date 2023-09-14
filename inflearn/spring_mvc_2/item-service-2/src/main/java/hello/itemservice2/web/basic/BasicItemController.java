@@ -1,4 +1,4 @@
-package hello.itemservice.web.basic;
+package hello.itemservice2.web.basic;
 
 import java.util.List;
 
@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import hello.itemservice.domain.item.Item;
-import hello.itemservice.domain.item.ItemRepository;
+import hello.itemservice2.domain.item.Item;
+import hello.itemservice2.domain.item.ItemRepository;
 import lombok.RequiredArgsConstructor;
 
 @Controller
