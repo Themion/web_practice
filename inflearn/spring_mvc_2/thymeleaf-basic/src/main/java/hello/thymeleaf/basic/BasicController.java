@@ -17,6 +17,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/basic")
 public class BasicController {
 
+  private void addUsers(Model model) {
+    List<User> list = new ArrayList<>();
+    list.add(new User("userA", 10));
+    list.add(new User("userB", 20));
+    list.add(new User("userC", 30));
+    model.addAttribute("users", list);
+  }
+
   @GetMapping("text-basic")
   public String textBasic(Model model) {
     // 자동 문자열 이스케이프
@@ -79,4 +87,11 @@ public class BasicController {
   public String attribute() {
     return "basic/attribute";
   }
+
+  @GetMapping(value = "/each")
+  public String each(Model model) {
+    this.addUsers(model);
+    return "basic/each";
+  }
+
 }
