@@ -11,7 +11,7 @@ public class Item {
   private Integer price;
   private Integer quantity = 0;
 
-  private boolean open;
+  private Boolean open;
   private List<String> regions;
   private ItemType itemType;
   private String deliveryCode;
