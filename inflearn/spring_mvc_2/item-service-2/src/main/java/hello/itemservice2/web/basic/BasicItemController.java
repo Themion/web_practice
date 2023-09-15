@@ -1,6 +1,8 @@
 package hello.itemservice2.web.basic;
 
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.PostConstruct;
 
@@ -25,6 +27,12 @@ import lombok.extern.slf4j.Slf4j;
 public class BasicItemController {
 
   private final ItemRepository itemRepository;
+  private static final Map<String, String> regions = new LinkedHashMap<>();
+
+  @ModelAttribute("regions")
+  public Map<String, String> regions() {
+    return regions;
+  };
 
   /*
    * 테스트용 데이터 추가
@@ -33,6 +41,10 @@ public class BasicItemController {
   public void init() {
     itemRepository.save(new Item("itemA", 10000, 10));
     itemRepository.save(new Item("itemB", 20000, 20));
+
+    regions.put("SEOUL", "서울");
+    regions.put("BUSAN", "부산");
+    regions.put("JEJU", "제주");
   }
 
   @GetMapping
