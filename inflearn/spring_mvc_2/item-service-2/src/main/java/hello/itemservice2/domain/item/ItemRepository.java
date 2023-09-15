@@ -32,12 +32,16 @@ public class ItemRepository {
     return new ArrayList<>(store.values());
   }
 
-  public void update(Long itemId, Item updateParam) {
+  public Item update(Long itemId, Item updateParam) {
     Item item = this.findById(itemId);
     item.setItemName(updateParam.getItemName());
     item.setPrice(updateParam.getPrice());
     item.setQuantity(updateParam.getQuantity());
-    this._save(item);
+    item.setOpen(updateParam.getOpen());
+    item.setRegions(updateParam.getRegions());
+    item.setItemType(updateParam.getItemType());
+    item.setDeliveryCode(updateParam.getDeliveryCode());
+    return this._save(item);
   }
 
   public void clearStore() {
