@@ -17,6 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import hello.itemservice2.domain.item.Item;
 import hello.itemservice2.domain.item.ItemRepository;
+import hello.itemservice2.domain.item.ItemType;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -33,6 +34,11 @@ public class BasicItemController {
   public Map<String, String> regions() {
     return regions;
   };
+
+  @ModelAttribute("itemTypes")
+  public ItemType[] itemTypes() {
+    return ItemType.values();
+  }
 
   /*
    * 테스트용 데이터 추가
