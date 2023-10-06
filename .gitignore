@@ -1,3 +1,4 @@
 .gitignore
 .gradle
 bin
+*:Zone.Identifier
