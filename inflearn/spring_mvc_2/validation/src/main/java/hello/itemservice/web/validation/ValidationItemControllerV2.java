@@ -32,13 +32,17 @@ public class ValidationItemControllerV2 {
         log.info(item.toString());
 
         if (!StringUtils.hasText(item.getItemName()))
-            bindingResult.addError(new FieldError("item", "itemName", "상품 이름은 필수입니다."));
+            bindingResult.addError(
+                    new FieldError("item", "itemName", item.getItemName(), false, null, null, "상품 이름은 필수입니다."));
 
         if (item.getPrice() == null || item.getPrice() < 1_000 || item.getPrice() > 1_000_000)
-            bindingResult.addError(new FieldError("item", "price", "가격은 1,000 ~ 1,000,000 까지 허용합니다."));
+            bindingResult.addError(new FieldError("item", "price", item.getPrice(), false, null, null,
+                    "가격은 1,000 ~ 1,000,000 까지 허용합니다."));
 
         if (item.getQuantity() == null || item.getQuantity() >= 9_999)
-            bindingResult.addError(new FieldError("item", "quantity", "수량은 최대 9,999까지 허용합니다."));
+            bindingResult.addError(
+                    new FieldError("item", "quantity", item.getQuantity(), false, null, null, "수량은 최대 9,999까지 허용합니다."));
+        // new FieldError("item", "quantity", "수량은 최대 9,999까지 허용합니다.")
 
         if (item.getPrice() != null && item.getQuantity() != null) {
             int totalPrice = item.getPrice() * item.getQuantity();
