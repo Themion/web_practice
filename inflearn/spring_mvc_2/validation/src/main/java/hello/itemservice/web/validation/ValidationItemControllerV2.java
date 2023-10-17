@@ -31,24 +31,32 @@ public class ValidationItemControllerV2 {
     private BindingResult validateItem(Item item, BindingResult bindingResult) {
         log.info(item.toString());
 
+        int minPrice = 1_000, maxPrice = 1_000_000, maxQuantity = 9_999, minTotalPrice = 10_000;
+
         if (!StringUtils.hasText(item.getItemName()))
             bindingResult.addError(
-                    new FieldError("item", "itemName", item.getItemName(), false, null, null, "상품 이름은 필수입니다."));
+                    new FieldError("item", "itemName", item.getItemName(), false,
+                            new String[] { "required.item.itemName" }, null, "상품 이름은 필수입니다."));
 
-        if (item.getPrice() == null || item.getPrice() < 1_000 || item.getPrice() > 1_000_000)
-            bindingResult.addError(new FieldError("item", "price", item.getPrice(), false, null, null,
-                    "가격은 1,000 ~ 1,000,000 까지 허용합니다."));
-
-        if (item.getQuantity() == null || item.getQuantity() >= 9_999)
+        if (item.getPrice() == null || item.getPrice() < minPrice || item.getPrice() > maxPrice)
             bindingResult.addError(
-                    new FieldError("item", "quantity", item.getQuantity(), false, null, null, "수량은 최대 9,999까지 허용합니다."));
+                    new FieldError("item", "price", item.getPrice(), false, new String[] { "range.item.price" },
+                            new Object[] { minPrice, maxPrice },
+                            "가격은 1,000 ~ 1,000,000 까지 허용합니다."));
+
+        if (item.getQuantity() == null || item.getQuantity() >= maxQuantity)
+            bindingResult.addError(
+                    new FieldError("item", "quantity", item.getQuantity(), false, new String[] { "max.item.quantity" },
+                            new Object[] { maxQuantity }, "수량은 최대 9,999까지 허용합니다."));
         // new FieldError("item", "quantity", "수량은 최대 9,999까지 허용합니다.")
 
         if (item.getPrice() != null && item.getQuantity() != null) {
             int totalPrice = item.getPrice() * item.getQuantity();
-            if (totalPrice < 10_000)
+            if (totalPrice < minTotalPrice)
                 bindingResult.addError(
-                        new ObjectError("item", "가격 * 수량의 합은 10,000 이상이어야 합니다. 현재 값 = " + totalPrice));
+                        new ObjectError("item", new String[] { "totalPriceMin" },
+                                new Object[] { minTotalPrice, totalPrice },
+                                "가격 * 수량의 합은 10,000 이상이어야 합니다. 현재 값 = " + totalPrice));
         }
         log.info("bindingResult = {}", bindingResult);
 
