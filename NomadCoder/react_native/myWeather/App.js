@@ -1,19 +1,43 @@
+import { setBehaviorAsync, setVisibilityAsync } from "expo-navigation-bar";
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
+
+import { Dimensions, ScrollView, StyleSheet, Text, View } from "react-native";
+
+const { width: SCREEN_WIDTH } = Dimensions.get("window");
 
 export default function App() {
+  setVisibilityAsync("hidden");
+  setBehaviorAsync("overlay-swipe");
+
   return (
     <View style={styles.rootView}>
-      <StatusBar style="light" />
+      <StatusBar style="auto" />
       <View style={styles.city}>
         <Text style={styles.cityName}>Seoul</Text>
       </View>
-      <View style={styles.weather}>
+      <ScrollView
+        contentContainerStyle={styles.weather}
+        horizontal
+        pagingEnabled
+        // showsHorizontalScrollIndicator={false}
+      >
         <View style={styles.day}>
           <Text style={styles.temperature}>27</Text>
           <Text style={styles.description}>Sunny</Text>
         </View>
-      </View>
+        <View style={styles.day}>
+          <Text style={styles.temperature}>27</Text>
+          <Text style={styles.description}>Sunny</Text>
+        </View>
+        <View style={styles.day}>
+          <Text style={styles.temperature}>27</Text>
+          <Text style={styles.description}>Sunny</Text>
+        </View>
+        <View style={styles.day}>
+          <Text style={styles.temperature}>27</Text>
+          <Text style={styles.description}>Sunny</Text>
+        </View>
+      </ScrollView>
     </View>
   );
 }
@@ -29,11 +53,12 @@ const styles = StyleSheet.create({
     fontSize: 68,
     fontWeight: "500",
   },
-  weather: { flex: 3 },
+  // no flex to container style!
+  weather: {},
   day: {
-    flex: 1,
+    width: SCREEN_WIDTH,
     alignItems: "center",
   },
-  temperature: { fontSize: 178, marginTop: 50 },
-  description: { fontSize: 60, marginTop: -50 },
+  temperature: { fontSize: 178 },
+  description: { fontSize: 60 },
 });
