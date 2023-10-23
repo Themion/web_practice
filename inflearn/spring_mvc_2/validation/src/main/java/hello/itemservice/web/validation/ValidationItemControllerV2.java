@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.ValidationUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,26 +24,15 @@ import lombok.extern.slf4j.Slf4j;
 public class ValidationItemControllerV2 {
 
     private final ItemRepository itemRepository;
+    private final ItemValidator itemValidator;
 
     private BindingResult validateItem(Item item, BindingResult bindingResult) {
         log.info("objectName={}", bindingResult.getObjectName());
         log.info("target={}", bindingResult.getTarget());
 
-        int minPrice = 1_000, maxPrice = 1_000_000, maxQuantity = 9_999, minTotalPrice = 10_000;
+        if (itemValidator.supports(Item.class))
+            itemValidator.validate(item, bindingResult);
 
-        ValidationUtils.rejectIfEmptyOrWhitespace(bindingResult, "itemName", "required");
-        // if (!StringUtils.hasText(item.getItemName()))
-        // bindingResult.rejectValue("itemName", "required");
-        if (item.getPrice() == null || item.getPrice() < minPrice || item.getPrice() > maxPrice)
-            bindingResult.rejectValue("price", "range", new Object[] { minPrice, maxPrice }, null);
-        if (item.getQuantity() == null || item.getQuantity() >= maxQuantity)
-            bindingResult.rejectValue("quantity", "max", new Object[] { maxQuantity }, null);
-
-        if (item.getPrice() != null && item.getQuantity() != null) {
-            int totalPrice = item.getPrice() * item.getQuantity();
-            if (totalPrice < minTotalPrice)
-                bindingResult.reject("totalPriceMin", new Object[] { minTotalPrice, totalPrice }, null);
-        }
         log.info("bindingResult = {}", bindingResult);
 
         return bindingResult;
