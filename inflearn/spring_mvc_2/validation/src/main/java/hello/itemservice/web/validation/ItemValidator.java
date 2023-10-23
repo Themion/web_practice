@@ -2,7 +2,6 @@ package hello.itemservice.web.validation;
 
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
-import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 import hello.itemservice.domain.item.Item;
@@ -20,13 +19,7 @@ public class ItemValidator implements Validator {
     public void validate(Object target, Errors errors) {
         Item item = (Item) target;
 
-        int minPrice = 1_000, maxPrice = 1_000_000, maxQuantity = 9_999, minTotalPrice = 10_000;
-
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "itemName", "required");
-        if (item.getPrice() == null || item.getPrice() < minPrice || item.getPrice() > maxPrice)
-            errors.rejectValue("price", "range", new Object[] { minPrice, maxPrice }, null);
-        if (item.getQuantity() == null || item.getQuantity() >= maxQuantity)
-            errors.rejectValue("quantity", "max", new Object[] { maxQuantity }, null);
+        int minTotalPrice = 10_000;
 
         if (item.getPrice() != null && item.getQuantity() != null) {
             int totalPrice = item.getPrice() * item.getQuantity();
