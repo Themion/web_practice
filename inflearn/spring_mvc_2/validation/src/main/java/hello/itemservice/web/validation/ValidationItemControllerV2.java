@@ -5,7 +5,10 @@ import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,9 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import hello.itemservice.domain.item.Item;
 import hello.itemservice.domain.item.ItemRepository;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
 @Controller
 @RequestMapping("/validation/v2/items")
 @RequiredArgsConstructor
@@ -26,16 +27,9 @@ public class ValidationItemControllerV2 {
     private final ItemRepository itemRepository;
     private final ItemValidator itemValidator;
 
-    private BindingResult validateItem(Item item, BindingResult bindingResult) {
-        log.info("objectName={}", bindingResult.getObjectName());
-        log.info("target={}", bindingResult.getTarget());
-
-        if (itemValidator.supports(Item.class))
-            itemValidator.validate(item, bindingResult);
-
-        log.info("bindingResult = {}", bindingResult);
-
-        return bindingResult;
+    @InitBinder
+    public void init(WebDataBinder webDataBinder) {
+        webDataBinder.addValidators(itemValidator);
     }
 
     @GetMapping
@@ -59,10 +53,10 @@ public class ValidationItemControllerV2 {
     }
 
     @PostMapping("/add")
-    public String addItemV1(@ModelAttribute Item item, BindingResult bindingResult,
+    public String addItemV1(@Validated @ModelAttribute Item item,
+            BindingResult bindingResult,
             RedirectAttributes redirectAttributes,
             Model model) {
-        bindingResult = validateItem(item, bindingResult);
         if (bindingResult.hasErrors())
             return "validation/v2/addForm";
 
@@ -81,9 +75,9 @@ public class ValidationItemControllerV2 {
     }
 
     @PostMapping("/{itemId}/edit")
-    public String editV1(@PathVariable Long itemId, @ModelAttribute Item item, BindingResult bindingResult,
+    public String editV1(@PathVariable Long itemId, @Validated @ModelAttribute Item item,
+            BindingResult bindingResult,
             Model model) {
-        bindingResult = validateItem(item, bindingResult);
         if (bindingResult.hasErrors())
             return "validation/v2/editForm";
 
