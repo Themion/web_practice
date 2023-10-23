@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ValidationUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,8 +32,9 @@ public class ValidationItemControllerV2 {
 
         int minPrice = 1_000, maxPrice = 1_000_000, maxQuantity = 9_999, minTotalPrice = 10_000;
 
-        if (!StringUtils.hasText(item.getItemName()))
-            bindingResult.rejectValue("itemName", "required");
+        ValidationUtils.rejectIfEmptyOrWhitespace(bindingResult, "itemName", "required");
+        // if (!StringUtils.hasText(item.getItemName()))
+        // bindingResult.rejectValue("itemName", "required");
         if (item.getPrice() == null || item.getPrice() < minPrice || item.getPrice() > maxPrice)
             bindingResult.rejectValue("price", "range", new Object[] { minPrice, maxPrice }, null);
         if (item.getQuantity() == null || item.getQuantity() >= maxQuantity)
