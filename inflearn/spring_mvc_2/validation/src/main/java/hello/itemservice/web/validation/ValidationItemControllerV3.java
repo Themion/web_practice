@@ -17,6 +17,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import hello.itemservice.domain.item.Item;
 import hello.itemservice.domain.item.ItemRepository;
+import hello.itemservice.domain.item.SaveCheck;
+import hello.itemservice.domain.item.UpdateCheck;
 import lombok.RequiredArgsConstructor;
 
 @Controller
@@ -53,7 +55,7 @@ public class ValidationItemControllerV3 {
     }
 
     @PostMapping("/add")
-    public String addItemV1(@Validated @ModelAttribute Item item,
+    public String addItem(@Validated(SaveCheck.class) @ModelAttribute Item item,
             BindingResult bindingResult,
             RedirectAttributes redirectAttributes,
             Model model) {
@@ -75,7 +77,7 @@ public class ValidationItemControllerV3 {
     }
 
     @PostMapping("/{itemId}/edit")
-    public String editV1(@PathVariable Long itemId, @Validated @ModelAttribute Item item,
+    public String edit(@PathVariable Long itemId, @Validated(UpdateCheck.class) @ModelAttribute Item item,
             BindingResult bindingResult,
             Model model) {
         if (bindingResult.hasErrors())

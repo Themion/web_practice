@@ -30,7 +30,9 @@
 
         <div>
             <label for="id" th:text="#{label.item.id}">상품 ID</label>
-            <input type="text" id="id" th:field="*{id}" class="form-control" readonly>
+            <input type="text" id="id" th:field="*{id}" class="form-control" readonly th:errorclass="field-error">
+            <div class="field-error" th:errors="*{itemName}">
+            </div>
         </div>
         <div>
             <label for="itemName" th:text="#{label.item.itemName}">상품명</label>
