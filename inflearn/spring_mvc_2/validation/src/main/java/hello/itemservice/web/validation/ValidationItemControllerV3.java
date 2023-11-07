@@ -6,9 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,11 +25,16 @@ import lombok.RequiredArgsConstructor;
 public class ValidationItemControllerV3 {
 
     private final ItemRepository itemRepository;
-    private final ItemValidator itemValidator;
 
-    @InitBinder
-    public void init(WebDataBinder webDataBinder) {
-        webDataBinder.addValidators(itemValidator);
+    private void validateItem(Item item, BindingResult bindingResult) {
+        int minTotalPrice = 10_000;
+
+        if (item.getPrice() != null && item.getQuantity() != null) {
+            int totalPrice = item.getPrice() * item.getQuantity();
+            if (totalPrice < minTotalPrice)
+                bindingResult.reject("totalPriceMin", new Object[] { minTotalPrice, totalPrice }, null);
+        }
+
     }
 
     @GetMapping
@@ -59,6 +62,7 @@ public class ValidationItemControllerV3 {
             BindingResult bindingResult,
             RedirectAttributes redirectAttributes,
             Model model) {
+        this.validateItem(item, bindingResult);
         if (bindingResult.hasErrors())
             return "validation/v3/addForm";
 
@@ -80,6 +84,7 @@ public class ValidationItemControllerV3 {
     public String edit(@PathVariable Long itemId, @Validated(UpdateCheck.class) @ModelAttribute Item item,
             BindingResult bindingResult,
             Model model) {
+        this.validateItem(item, bindingResult);
         if (bindingResult.hasErrors())
             return "validation/v3/editForm";
 
