@@ -24,12 +24,13 @@ public class TestDataInit {
         itemRepository.save(new Item("itemA", 10000, 10));
         itemRepository.save(new Item("itemB", 20000, 20));
 
-        memberRepository.save(
-                Member.builder()
-                        .loginId("test")
-                        .password("test!")
-                        .name("테스터")
-                        .build());
+        Member member = Member.builder()
+                .loginId("test")
+                .password("test!")
+                .name("테스터")
+                .build();
+
+        memberRepository.save(member);
     }
 
 }

@@ -1,6 +1,7 @@
 package hello.login.domain.member;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -12,7 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Repository
 public class MemberRepository {
-    private static Map<Long, Member> store;
+    private static Map<Long, Member> store = new HashMap<>();
     private static long sequence = 0L;
 
     public Member save(Member member) {
