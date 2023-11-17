@@ -1,0 +1,1 @@
+GET http://localhost:8080/api/query-param-object?name=mike&age=30&address=seoul&email=testEmail&phone-number=01020335504

@@ -1,0 +1,10 @@
+POST http://localhost:8080/api/post-request-body
+Content-Type: application/json
+
+{
+  "name": "mike.lee",
+  "age": 123,
+  "email": "mike.lee@bucketplace.net",
+  "address": "seoul",
+  "phone_number": "010-2345-6789"
+}

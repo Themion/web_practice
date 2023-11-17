@@ -1,0 +1,11 @@
+PUT http://localhost:8080/api/object
+Content-Type: application/json
+
+{
+  "name": "mike.lee",
+  "age": 123,
+  "email": "mike.lee@bucketplace.net",
+  "address": "seoul",
+  "phoneNumber": "010-2345-6789",
+  "createdAt": "2023-11-15 14:50:27"
+}

@@ -1,0 +1,1 @@
+DELETE http://localhost:8080/api/request-mapping?name=kim&age=100
