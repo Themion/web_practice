@@ -1,12 +1,12 @@
 import Navigation from "../components/navigation";
 
-const App = () => {
+const NotFound = () => {
   return (
     <>
       <Navigation />
-      <h1>Hello Next.js!</h1>
+      <h1>Not Found!</h1>
     </>
   );
 };
 
-export default App;
+export default NotFound;
