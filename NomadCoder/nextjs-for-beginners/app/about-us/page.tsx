@@ -1,5 +1,9 @@
 import Avatar from "./components/avatar";
 
+export const metadata = {
+  title: "About Us",
+};
+
 const AboutUs = () => {
   return (
     <>

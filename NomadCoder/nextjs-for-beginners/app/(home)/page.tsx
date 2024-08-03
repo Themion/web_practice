@@ -1,4 +1,8 @@
-// import { useState } from "react";
+// import { useState } from "react";\
+
+export const metadata = {
+  title: "Home",
+};
 
 const App = () => {
   // This will not work: RSC will not be hydrated!
