@@ -1,4 +1,5 @@
 import { PropsWithChildren } from "react";
+import Navigation from "../components/navigation";
 
 export const metadata = {
   title: "Next.js",
@@ -8,7 +9,10 @@ export const metadata = {
 const RootLayout = ({ children }: PropsWithChildren) => {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <Navigation />
+        {children}
+      </body>
     </html>
   );
 };
