@@ -6,6 +6,8 @@ type Props = {
 };
 
 const getVideos = async (id: string): Promise<Video[]> => {
+  const rand = Math.random();
+  if (rand < 0.5) throw new Error("ASD");
   const response = await fetch(`${API_URL}/${id}/videos`);
   return response.json();
 };
