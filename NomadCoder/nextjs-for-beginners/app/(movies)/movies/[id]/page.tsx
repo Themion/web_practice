@@ -1,52 +1,21 @@
-import { API_URL } from "../../../../constants";
-import { Movie, Video } from "../../../../types";
+import { Suspense } from "react";
+import MovieInfo from "../../../../components/movie-info";
+import MovieVideos from "../../../../components/movie-videos";
 
 type Props = {
   params: { id: string };
   searchParams: Record<string, string>;
 };
 
-const getMovie = async (id: string): Promise<Movie> => {
-  const response = await fetch(`${API_URL}/${id}`);
-  return response.json();
-};
-
-const getVideos = async (id: string): Promise<Video[]> => {
-  const response = await fetch(`${API_URL}/${id}/videos`);
-  return response.json();
-};
-
-const MovieDetail = async ({ params }: Props) => {
-  // const movie = await getMovie(params.id);
-  // const videos = await getVideos(params.id);
-
-  const [movie, videos] = await Promise.all([
-    getMovie(params.id),
-    getVideos(params.id),
-  ]);
-
-  console.log(videos);
-
-  const trailer = videos
-    .filter(({ site, official }) => site === "YouTube" && official)
-    .map(({ key }) => (
-      <iframe
-        key={key}
-        width="951"
-        height="535"
-        src={`https://www.youtube.com/embed/${key}`}
-        title="2 4 Parallel Requests"
-        frameBorder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        referrerPolicy="strict-origin-when-cross-origin"
-        allowFullScreen
-      ></iframe>
-    ));
-
+const MovieDetail = ({ params }: Props) => {
   return (
     <>
-      <h1>{movie.title}</h1>
-      {trailer}
+      <Suspense fallback={<h1>Loading movie info...</h1>}>
+        <MovieInfo id={params.id} />
+      </Suspense>
+      <Suspense fallback={<h1>Loading movie videos...</h1>}>
+        <MovieVideos id={params.id} />
+      </Suspense>
     </>
   );
 };
