@@ -1,35 +1,28 @@
-// import { useState } from "react";\
+// import { useState } from "react";
 
-type Movie = {
-  adult: boolean;
-  backdrop_path: string;
-  genre_ids: number[];
-  id: number;
-  original_langage: string;
-  original_title: string;
-  overview: string;
-  popularity: string;
-  poster_path: string;
-  title: string;
-  video: boolean;
-  vote_average: string;
-  vote_count: string;
-};
-
-const URL = "https://nomad-movies.nomadcoders.workers.dev/movies";
+import Link from "next/link";
+import { API_URL } from "../../constants";
+import { Movie } from "../../types";
 
 export const metadata = {
   title: "Home",
 };
 
 const getMovies = async (): Promise<Movie[]> => {
-  await new Promise((resolve) => setTimeout(resolve, 10000));
-  return fetch(URL).then((res) => res.json());
+  return fetch(API_URL).then((res) => res.json());
 };
 
 const App = async () => {
   const movies = await getMovies();
-  return <div>{JSON.stringify(movies)}</div>;
+  return (
+    <div>
+      {movies.map(({ id, title }) => (
+        <li key={id}>
+          <Link href={`/movies/${id}`}>{title}</Link>
+        </li>
+      ))}
+    </div>
+  );
 };
 
 export default App;
